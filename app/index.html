@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>19 Checkers</title>
+    <title>Checkers</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css styles/vendor.css -->
@@ -23,29 +23,29 @@
   </head>
   <body>
 
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-        <li>HTML5 Boilerplate</li>
-        <li>Normalize CSS</li>
-        <li>Sass</li>
-        <li>Modernizr</li>
-        <li>Bourbon & Neat</li>
-        <li>UnderscoreJS</li>
-      </ul>
-      <p>Don't forget to update your readme file!!</p>
-    </div>
+    <section class="board">
+      <h1>Checker Board</h1>
+    </section>
+
+    <button>Start Game</button>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../bower_components/backbone/backbone.js"></script>
+    <script src="../bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-</body>
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/init.js"></script>
+    <script src="scripts/templates.js"></script>
+    <script src="scripts/models/man.js"></script>
+    <script src="scripts/models/board.js"></script>
+    <script src="scripts/models/player.js"></script>
+    <script src="scripts/views/home.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>

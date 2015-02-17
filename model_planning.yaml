@@ -1,0 +1,56 @@
+---
+
+users:
+  user:
+    id: email address
+    password: hashed pw
+    token: generated
+    nickName: email prefix
+    avatar: http://...
+    gameHistory:
+      wins: 0
+      losses: 0
+      draws: 0
+      streak: 0
+      avgNumMoves: 0
+      skillLevel: 0
+    boardTheme: blue / grey
+    manTheme: black / red
+    editProfile: function ()
+
+games:
+  game:
+    auth: token
+    id: gameID (uuid)
+    isTimed: false
+    addTimer: function ()
+    quitConfirm: function ()
+    restartConfirm: function ()
+
+    players:
+      player1:
+        id: authID
+        manTheme: brown / beige
+        isActive: true
+        prisonCount: 0
+        takePrisoner: function ()
+        isWin: function ()
+
+      player2:
+        id: authID
+        manTheme: brown / beige
+        isActive: false
+        prisonCount: 0
+        takePrisoner: function ()
+        isWin: function ()
+
+    boards:
+      board:
+        id: board
+        boardState: [[' ', 'M', ' ', ...], [...], ...[...]]
+        oldBoardState: [[' ', 'M', ' ', ...], [...], ...[...]]
+        dullMoveCount: 0
+        isValidMove: function ()
+        move: function (direction, distance)
+        crown: function ()
+
