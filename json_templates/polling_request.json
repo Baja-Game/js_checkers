@@ -1,0 +1,72 @@
+
+// Client needs a polling endpoint for a POST request.
+// Polling could be triggered every ~3 seconds while
+// the user has the browser open.  Browser inactivity
+// for ~5 minutes will stop the polling.
+
+// JSON format could look something like this...
+
+{
+  "user":
+    {
+      "nickName": "default to username",
+      "avatar": "image file",
+      "gameHistory":
+        {
+          "wins": 0,
+          "losses": 0,
+          "draws": 0,
+          "streak": 0,
+          "avgNumMoves": 0,
+          "skillLevel": 0
+        },
+      "boardTheme": "blue/grey",
+      "manTheme": "black/red"
+    },
+  "games":
+    [
+      {
+        "gameID": "uuid",
+        "wasStartedByMe": false,
+        "isMyTurn": true,
+        "lastMoveTime": "UTC timestamp",
+        "opponent": "userID",
+        "myPrisonCount": 0,
+        "opponentLastMove": [[5, 4], [4, 5]],
+        "boardState": [
+          [" ", "M", " ", "M", " ", "M", " ", "M"],
+          ["M", " ", "M", " ", "M", " ", "M", " "],
+          [" ", "M", " ", "M", " ", "M", " ", "M"],
+          [" ", " ", " ", " ", " ", " ", " ", " "],
+          [" ", " ", " ", " ", " ", "m", " ", " "],
+          ["m", " ", "m", " ", " ", " ", "m", " "],
+          [" ", "m", " ", "m", " ", "m", " ", "m"],
+          ["m", " ", "m", " ", "m", " ", "m", " "]
+        ],
+        "dullMoveCount": 1,
+        "isTimed": false
+      },
+      {
+        "gameID": "uuid",
+        "wasStartedByMe": false,
+        "isMyTurn": true,
+        "lastMoveTime": "UTC timestamp",
+        "opponent": "userID",
+        "myPrisonCount": 0,
+        "opponentLastMove": [[5, 4], [4, 5]],
+        "boardState": [
+          [" ", "M", " ", "M", " ", "M", " ", "M"],
+          ["M", " ", "M", " ", "M", " ", "M", " "],
+          [" ", "M", " ", "M", " ", "M", " ", "M"],
+          [" ", " ", " ", " ", " ", " ", " ", " "],
+          [" ", " ", " ", " ", " ", "m", " ", " "],
+          ["m", " ", "m", " ", " ", " ", "m", " "],
+          [" ", "m", " ", "m", " ", "m", " ", "m"],
+          ["m", " ", "m", " ", "m", " ", "m", " "]
+        ],
+        "dullMoveCount": 1,
+        "isTimed": false
+      }
+    ]
+}
+

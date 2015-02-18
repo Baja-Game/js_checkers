@@ -1,0 +1,42 @@
+
+// Client needs an endpoint to POST a request to
+// when user wishes to start a game.
+
+// JSON format could look something like this...
+
+{
+  "isTimed": false
+}
+
+
+// Server response could look something like this
+// if existing game IS NOT available...
+
+{
+  "gameID": "uuid",
+  "wasStartedByMe": true,
+  "isTimed": false
+}
+
+
+// Or, server response could look something like this
+// if existing game IS available...
+
+{
+  "gameID": "uuid",
+  "wasStartedByMe": false,
+  "myPrisonCount": 0,
+  "opponentLastMove": [[5, 4], [4, 5]],
+  "boardState": [
+    [" ", "M", " ", "M", " ", "M", " ", "M"],
+    ["M", " ", "M", " ", "M", " ", "M", " "],
+    [" ", "M", " ", "M", " ", "M", " ", "M"],
+    [" ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", "m", " ", " "],
+    ["m", " ", "m", " ", " ", " ", "m", " "],
+    [" ", "m", " ", "m", " ", "m", " ", "m"],
+    ["m", " ", "m", " ", "m", " ", "m", " "]
+  ],
+  "isTimed": false
+}
+

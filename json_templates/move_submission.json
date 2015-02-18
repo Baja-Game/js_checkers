@@ -1,0 +1,24 @@
+
+// Client needs an endpoint to POST a request to
+// once user makes a move.
+
+// JSON format could look something like this...
+
+{
+  "gameID": "uuid",
+  "wasStartedByMe": true,
+  "myPrisonCount": 0,
+  "myLastMove": [[5, 4], [4, 5]],
+  "boardState": [
+    [" ", "M", " ", "M", " ", "M", " ", "M"],
+    ["M", " ", "M", " ", "M", " ", "M", " "],
+    [" ", "M", " ", "M", " ", "M", " ", "M"],
+    [" ", " ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", "m", " ", " "],
+    ["m", " ", "m", " ", " ", " ", "m", " "],
+    [" ", "m", " ", "m", " ", "m", " ", "m"],
+    ["m", " ", "m", " ", "m", " ", "m", " "]
+  ],
+  "isTimed": false
+}
+

@@ -1,0 +1,13 @@
+
+// Client needs an endpoint to POST a request to once user edits
+// their profile (maybe only include the properties that changed).
+
+// JSON format could look something like this...
+
+{
+  "nickName": "default to username",
+  "avatar": "image file",
+  "boardTheme": "blue/grey",
+  "manTheme": "black/red"
+}
+
