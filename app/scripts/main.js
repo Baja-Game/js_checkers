@@ -2,6 +2,8 @@
 (function () {
   'use strict';
 
+  app.login = new app.LoginView();
+
   app.players = new app.Players();
 
   app.players.fetch().done(function () {
@@ -19,7 +21,10 @@
   app.boards.fetch().done(function () {
     console.log('\nBoards fetched: ', this);
     app.home = new app.Home({boardsCollection: app.boards});
+
   });
 
-}());
 
+
+
+}());

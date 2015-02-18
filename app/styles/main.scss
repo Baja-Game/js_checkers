@@ -21,3 +21,16 @@
 #chessBoard div:nth-child(odd) span:nth-child(odd){
     background-color: lightGray;
 }
+#userName{
+  padding: 15em;
+  width: 11em;
+  input{
+    width: 17em;
+    border-color: gray;
+    border-radius: 0.3em;
+  }
+  input#subBtn{
+    width: 8em;
+    
+  }
+}
