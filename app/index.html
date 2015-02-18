@@ -10,6 +10,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -23,11 +24,11 @@
   </head>
   <body>
 
-    <section class="board">
-      <h1>Checker Board</h1>
-    </section>
+    <div class="container">
 
-    <button>Start Game</button>
+      <div id="chessBoard"></div>
+
+    </div>  
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -35,6 +36,7 @@
     <script src="../bower_components/underscore/underscore.js"></script>
     <script src="../bower_components/backbone/backbone.js"></script>
     <script src="../bower_components/handlebars/handlebars.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
