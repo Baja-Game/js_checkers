@@ -10,7 +10,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css" />
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -49,21 +49,24 @@
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
-    <script src="../bower_components/backbone/backbone.js"></script>
     <script src="../bower_components/handlebars/handlebars.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/backbone/backbone.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <script src="scripts/init.js"></script>
     <script src="scripts/templates.js"></script>
+    <script src="scripts/models/userLogin.model.js"></script>
     <script src="scripts/models/man.js"></script>
     <script src="scripts/models/board.js"></script>
     <script src="scripts/models/player.js"></script>
-    <script src="scripts/models/userLogin.model.js"></script>
+    <script src="scripts/models/game.js"></script>
     <script src="scripts/views/home.js"></script>
     <script src="scripts/views/logIn.view.js"></script>
+    <script src="scripts/views/games_list.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
   </body>
