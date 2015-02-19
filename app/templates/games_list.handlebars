@@ -1,0 +1,23 @@
+
+{{!-- <li>ID: {{ _id }}</li> --}}
+
+  <table class="table table-hover">
+    <thead>
+      <th>
+        <td>Game ID</td>
+        <td>Opponent</td>
+        <td>Last Move</td>
+        <td>Prisoners</td>
+        <td>Timed Game?</td>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ _id }}</td>
+        <td>{{ opponent }}</td>
+        <td>{{ lastMoveTime }}</td>
+        <td>{{ myPrisonCount }}</td>
+        <td>{{ isTimed }}</td>
+      </tr>
+    </tbody>
+  </table>
