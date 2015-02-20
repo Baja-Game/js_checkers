@@ -41,7 +41,7 @@
 
         var clock, hash, isOddTurn, isEvenTurn, player1IsMe, player2IsMe, isMyTurn;
 
-        app.myTurnGames = [],
+        app.myTurnGames = [];
         app.theirTurnGames = [];
 
         self.collection.forEach(function (game) {
@@ -49,7 +49,7 @@
           clock = game.attributes.is_timed === 'true' ? '<i class="fa fa-clock-o"></i>' : '---';
           game.set('clock', clock);
 
-          hash = CryptoJS.MD5(game.attributes.player2).toString()
+          hash = CryptoJS.MD5(game.attributes.player2).toString();
           game.set('hash', hash);
 
           isOddTurn = Number(game.attributes.turn_counter) % 2 == 1;
