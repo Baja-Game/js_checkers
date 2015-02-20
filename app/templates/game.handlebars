@@ -1,12 +1,12 @@
 
 <li>
-  <div class="image"><img src="http://www.gravatar.com/avatar/' + {{ hash }} + '?s=200&d=monsterid" alt=""></div>
+  <div class="image"><img src="http://www.gravatar.com/avatar/{{ hash }}?s=200&d=monsterid" alt=""></div>
   <div class="text">
     <div class="opponent-name">{{ opponent }}</div>
-    <div class="captured">You have captured <span class="captured-value">{{ myPrisonCount }}</span> {{ prisoner }}!</div>
+    <div class="captured">You have captured <span class="captured-value">{{ prisonCount }}</span> {{ prisoner }}!</div>
   </div>
   <div class="timestamps">
-    <div class="last-move">{{#if isMyTurn}}<i class="fa fa-spinner fa-pulse"></i>{{/if}}&nbsp;{{ lastMoveTime }}</div>
+    <div class="last-move">{{#if isMyTurn}}<i class="fa fa-spinner fa-pulse"></i>{{/if}}&nbsp;{{ timestamp }}</div>
     <div class="timed">{{ clock }}</div>
   </div>
 </li>

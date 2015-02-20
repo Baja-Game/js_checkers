@@ -39,6 +39,8 @@
       finished: 0
     }
 
+    // TODO: Map the backend board to a matrix that looks like the default above.
+
   });
 
 

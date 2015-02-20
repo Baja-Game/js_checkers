@@ -37,17 +37,19 @@
 
       this.collection.fetch().done(function () {
 
-        var gamesGroup,
+        var filteredGamesList,
             isOddTurn, isEvenTurn,
             player1IsMe, player2IsMe,
             isMyTurn,
-            clock, hash;
+            hash, opponent, prisonCount, prisoner, timestamp, clock;
 
-        gamesGroup = self.collection.filter(function (game) {
+        filteredGamesList = self.collection.filter(function (game) {
 
           isOddTurn = Number(game.attributes.turn_counter) % 2 == 1;
           isEvenTurn = !isOddTurn;
+
           // TODO: Swap out 'my_id' for app.user.username once that is exposed.
+
           player1IsMe = game.attributes.player1 === 'my_id';
           player2IsMe = !player1IsMe;
 
@@ -57,19 +59,55 @@
 
         });
 
-        gamesGroup.forEach(function (game) {
+        filteredGamesList.forEach(function (game) {
 
-          clock = game.attributes.is_timed === 'true' ? '<i class="fa fa-clock-o"></i>' : '---';
-          game.set('clock', clock);
+          // TODO: Figure out how to get true back as a boolean rather than a string.
 
           hash = CryptoJS.MD5(game.attributes.player2).toString();
           game.set('hash', hash);
+
+          opponent = isMyTurn ? game.attributes.player2 : game.attributes.player1;
+          game.set('opponent', opponent);
+
+          prisonCount = self.countPrisoners(game.attributes.board, player1IsMe);
+          game.set('prisonCount', prisonCount);
+
+          prisoner = self.pluralize(prisonCount, 'prisoner');
+          game.set('prisoner', prisoner);
+
+          game.set('isMyTurn', isMyTurn);
+
+          timestamp = moment(game.attributes.timestamp).fromNow();
+          game.set('timestamp', timestamp);
+
+          clock = game.attributes.is_timed === 'true' ? '<i class="fa fa-clock-o"></i>' : '---';
+          game.set('clock', clock);
 
           self.$el.append(self.template(game.attributes));
         });
 
       });
+    },
+
+    countPrisoners: function (board, player1IsMe) {
+      var i, j,
+          freeMenCount = 0;
+      board.forEach(function (row) {
+        row.forEach(function (cell) {
+          if (player1IsMe) {
+            if (cell === 'M' || cell === 'K') {
+              freeMenCount++;
+            }
+          } else {
+            if (cell === 'm' || cell === 'k') {
+              freeMenCount++;
+            }
+          }
+        });
+      });
+      return (12 - freeMenCount);
     }
+
   });
 }());
 
