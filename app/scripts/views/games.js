@@ -37,20 +37,13 @@
 
       this.collection.fetch().done(function () {
 
-        console.log('\nGames collection fetched from endpoint: ');
+        var gamesGroup,
+            isOddTurn, isEvenTurn,
+            player1IsMe, player2IsMe,
+            isMyTurn,
+            clock, hash;
 
-        var clock, hash, isOddTurn, isEvenTurn, player1IsMe, player2IsMe, isMyTurn;
-
-        app.myTurnGames = [];
-        app.theirTurnGames = [];
-
-        self.collection.forEach(function (game) {
-
-          clock = game.attributes.is_timed === 'true' ? '<i class="fa fa-clock-o"></i>' : '---';
-          game.set('clock', clock);
-
-          hash = CryptoJS.MD5(game.attributes.player2).toString();
-          game.set('hash', hash);
+        gamesGroup = self.collection.filter(function (game) {
 
           isOddTurn = Number(game.attributes.turn_counter) % 2 == 1;
           isEvenTurn = !isOddTurn;
@@ -60,24 +53,21 @@
 
           isMyTurn = isOddTurn && player1IsMe || isEvenTurn && player2IsMe;
 
-          if (isMyTurn) {
-            app.myTurnGames.push(game);
-          } else {
-            app.theirTurnGames.push(game);
-          }
+          return (self.myGamesView) ? isMyTurn: !isMyTurn;
+
         });
 
-        console.log('My moves...');
-        console.log(app.myTurnGames);
+        gamesGroup.forEach(function (game) {
 
-        console.log('Their moves...');
-        console.log(app.theirTurnGames);
+          clock = game.attributes.is_timed === 'true' ? '<i class="fa fa-clock-o"></i>' : '---';
+          game.set('clock', clock);
 
-        var arr = self.myGamesView ? app.myTurnGames : app.theirTurnGames;
+          hash = CryptoJS.MD5(game.attributes.player2).toString();
+          game.set('hash', hash);
 
-        arr.forEach(function (game) {
           self.$el.append(self.template(game.attributes));
         });
+
       });
     }
   });
