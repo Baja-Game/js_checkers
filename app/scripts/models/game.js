@@ -11,36 +11,32 @@
     idAttribute: '_id',  // This is for MongoDB
 
     defaults: {
+      game_id: 'unique_string',
+      timestamp: '2015-02-17T18:25:43.511Z',
+      player1: 'my_id',
+      player2: null,
+      board: [
+        [' ','M',' ','M',' ','M',' ','M'],
 
-      gameID: '',
-      wasStartedByMe: true,
-      isMyTurn: true,
-      lastMoveTime: '',
-      opponent: '',
-      opponentLastMove: [],
-      myPrisonCount: 0,
+        ['M',' ','M',' ','M',' ','M',' '],
 
-      // boardState: [
-      //   [' ','M',' ','M',' ','M',' ','M'],
+        [' ','M',' ','M',' ','M',' ','M'],
 
-      //   ['M',' ','M',' ','M',' ','M',' '],
+        [' ',' ',' ',' ',' ',' ',' ',' '],
 
-      //   [' ','M',' ','M',' ','M',' ','M'],
+        [' ',' ',' ',' ',' ',' ',' ',' '],
 
-      //   [' ',' ',' ',' ',' ',' ',' ',' '],
+        ['m',' ','m',' ','m',' ','m',' '],
 
-      //   [' ',' ',' ',' ',' ',' ',' ',' '],
+        [' ','m',' ','m',' ','m',' ','m'],
 
-      //   ['m',' ','m',' ','m',' ','m',' '],
-
-      //   [' ','m',' ','m',' ','m',' ','m'],
-
-      //   ['m',' ','m',' ','m',' ','m',' ']
-      // ],
-
-      dullMoveCount: 0,
-      isTimed: false
-
+        ['m',' ','m',' ','m',' ','m',' ']
+      ],
+      last_move: [],
+      turn_counter: 0,
+      dull_move_counter: 0,
+      is_timed: false,
+      finished: 0
     }
 
   });
@@ -55,7 +51,7 @@
 
     model: app.Game,
 
-    url: 'http://tiy-atl-fe-server.herokuapp.com/collections/bob_ch_games'
+    url: 'http://tiy-atl-fe-server.herokuapp.com/collections/bob_ch_games_array'
 
   });
 

@@ -7,6 +7,9 @@
     <title>Checkers</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Cuprum|Lobster'>
+
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css" />
@@ -23,16 +26,25 @@
     <!-- endbuild -->
   </head>
   <body>
-
-    <div class="container">
-
-      <div class="main">
-
-        <div id="checkerBoard"></div>
-
-      </div>
-
+    <div class="header-banner">
+      <header>
+        <div class="header-icon games-icon"><i class="fa fa-list"></i></div>
+        <div class="header-icon leaderboard-icon"><i class="fa fa-trophy"></i></div>
+        <div class="header-center">
+          <div class="title">Monster Checkers</div>
+          <div class="header-icon new-game-icon"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Game</div></div>
+        </div>
+      </header>
     </div>
+
+    <div class="modal"></div>
+
+    <div class="games-wrapper">
+      <h2 id="myTurn">Your Move</h2>
+      <h2 id="theirTurn">Their Move</h2>
+    </div>
+
+    <div class="board-wrapper"></div>
 
 
     <script type="text/template" id="loginTemp">
@@ -52,21 +64,26 @@
     <script src="../bower_components/handlebars/handlebars.js"></script>
     <script src="../bower_components/backbone/backbone.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <script src="scripts/init.js"></script>
+    <script src="scripts/temp/test_endpoints.js"></script>
+    <script src="scripts/temp/remote_games_save.js"></script>
+    <script src="scripts/temp/games_data.js"></script>
     <script src="scripts/templates.js"></script>
     <script src="scripts/models/userLogin.model.js"></script>
-    <script src="scripts/models/man.js"></script>
-    <script src="scripts/models/board.js"></script>
-    <script src="scripts/models/player.js"></script>
+    <!-- <script src="scripts/models/man.js"></script> -->
+    <!-- <script src="scripts/models/board.js"></script> -->
+    <!-- <script src="scripts/models/player.js"></script> -->
     <script src="scripts/models/game.js"></script>
-    <script src="scripts/views/home.js"></script>
+    <!-- <script src="scripts/views/home.js"></script> -->
     <script src="scripts/views/logIn.view.js"></script>
-    <script src="scripts/views/games_list.js"></script>
+    <script src="scripts/views/games.js"></script>
+    <script src="scripts/views/board.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
   </body>
