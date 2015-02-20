@@ -27,61 +27,6 @@ body {
 
 *:before, *:after { box-sizing: inherit; }
 
-.header-banner {
-  height: 120px;
-  background: #685a95;
-  color: #100434;
-}
-
-// Header =======================================
-
-header {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 15px;
-}
-
-.header-icon {
-  width: 95px;
-  height: 70px;
-  border-radius: 8px;
-  padding-top: 20px;
-  text-align: center;
-  font-size: 44px;
-  background: #e4cd3d;
-  color: darkblue;
-}
-
-.games-icon {
-  float: left;
-  background: #e4cd3d;
-}
-
-.leaderboard-icon {
-  float: right;
-}
-
-.title {
-  letter-spacing: 3px;
-  text-align: center;
-  font-family: 'Lobster', cursive;
-  font-size: 24px;
-  color: #dfe2fc;
-}
-
-.new-game-icon {
-  width: 250px;
-  height: 45px;
-  line-height: 45px;
-  margin: 15px auto;
-  padding: 0;
-  text-align: center;
-  font-size: 22px;
-  background: #e58300;
-  color: white;
-}
-
 ul {
   padding: 0;
 }
@@ -91,101 +36,131 @@ li {
   margin: 8px 0;
 }
 
+// Header =======================================
+
+.header-banner {
+  height: 120px;
+  background: #685a95;
+  color: #100434;
+  header {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    .header-icon {
+      width: 95px;
+      height: 70px;
+      border-radius: 8px;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 44px;
+      background: #e4cd3d;
+      color: darkblue;
+    }
+    .games-icon {
+      float: left;
+      background: #e4cd3d;
+    }
+    .leaderboard-icon {
+      float: right;
+    }
+    .header-center {
+      .title {
+        letter-spacing: 3px;
+        text-align: center;
+        font-family: 'Lobster', cursive;
+        font-size: 24px;
+        color: #dfe2fc;
+      }
+      .new-game-icon {
+        width: 250px;
+        height: 45px;
+        line-height: 45px;
+        margin: 15px auto;
+        padding: 0;
+        text-align: center;
+        font-size: 22px;
+        background: #e58300;
+        color: white;
+      }
+    }
+  }
+}
+
 .games-wrapper {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  h2 {
+    text-transform: uppercase;
+    margin-bottom: -10px;
+    color: #9b91b8;
+  }
+
+  li {
+    height: 100px;
+    background: white;
+    border-radius: 8px;
+    div.image {
+      float: left;
+      img {
+        width: 80px;
+        border-radius: 5px;
+        margin: 10px;
+      }
+    }
+    div.text {
+      float: left;
+      margin: 10px;
+      div.opponent-name {
+        font-size: 30px;
+      }
+      div.captured {
+        float: left;
+        margin-top: 20px;
+        span.captured-value {
+          font-size: 24px;
+          color: #e58300;
+        }
+      }
+    }
+    div.timestamps {
+      float: right;
+      margin-right: 12px;
+      div.last-move {
+        text-align: right;
+        margin-top: 15px;
+        color: #bbb;
+      }
+      div.timed {
+        text-align: right;
+        margin-top: 35px;
+        color: rgb(224, 192, 19);
+        i.fa-clock-o {
+          font-size: 24px;
+        }
+      }
+    }
+  }
 }
-
-.games-wrapper h2 {
-  text-transform: uppercase;
-  margin-bottom: -10px;
-  color: #9b91b8;
-}
-
-.games-wrapper li {
-  height: 100px;
-  background: white;
-  border-radius: 8px;
-}
-
-div.image {
-  float: left;
-}
-
-img {
-  width: 80px;
-  border-radius: 5px;
-  margin: 10px;
-}
-
-div.text {
-  float: left;
-  margin: 10px;
-}
-
-div.opponent-name {
-  font-size: 30px;
-}
-
-div.captured {
-  float: left;
-  margin-top: 20px;
-}
-
-span.captured-value {
-  font-size: 24px;
-  color: #e58300;
-}
-
-div.timestamps {
-  float: right;
-  margin-right: 12px;
-}
-
-div.last-move {
-  text-align: right;
-  margin-top: 15px;
-  color: #bbb;
-}
-
-div.timed {
-  text-align: right;
-  margin-top: 35px;
-  color: rgb(224, 192, 19);
-}
-
-i.fa-clock-o {
-  font-size: 24px;
-}
-
-
 
 .board-wrapper {
   width: 100%;
   max-width: 650px;
   margin: 0 auto;
-}
-
-.board {
-  margin: 40px 25px;
-}
-
-.board div {
-  // line-height: 1px;
-}
-
-.board span {
-  display: inline-block;
-  width: 75px;
-  height: 75px;
-  border-radius: 8px;
-  // background: pink;
-}
-
-.board div:nth-child(odd) span:nth-child(even),
-.board div:nth-child(even) span:nth-child(odd){
-  background-color: white;
+  .board {
+    margin: 40px 25px;
+    span {
+      display: inline-block;
+      width: 75px;
+      height: 75px;
+      border-radius: 8px;
+    }
+    div:nth-child(odd) span:nth-child(even),
+    div:nth-child(even) span:nth-child(odd){
+      background-color: white;
+    }
+  }
 }
 
 
