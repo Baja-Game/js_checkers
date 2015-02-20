@@ -3,10 +3,12 @@
 templates['board'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "\n\n";
   },"useData":true});
-templates['games'] = template({"1":function(depth0,helpers,partials,data) {
+templates['game'] = template({"1":function(depth0,helpers,partials,data) {
   return "<i class=\"fa fa-spinner fa-pulse\"></i>";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "\n<li>\n  <div class=\"image\"><img src=\"http://www.gravatar.com/avatar/' + hash + '?s=200&d=monsterid\" alt=\"\"></div>\n  <div class=\"text\">\n    <div class=\"opponent-name\">"
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "\n<li>\n  <div class=\"image\"><img src=\"http://www.gravatar.com/avatar/' + "
+    + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
+    + " + '?s=200&d=monsterid\" alt=\"\"></div>\n  <div class=\"text\">\n    <div class=\"opponent-name\">"
     + escapeExpression(((helper = (helper = helpers.opponent || (depth0 != null ? depth0.opponent : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"opponent","hash":{},"data":data}) : helper)))
     + "</div>\n    <div class=\"captured\">You have captured <span class=\"captured-value\">"
     + escapeExpression(((helper = (helper = helpers.myPrisonCount || (depth0 != null ? depth0.myPrisonCount : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"myPrisonCount","hash":{},"data":data}) : helper)))
