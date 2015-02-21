@@ -23,8 +23,11 @@ li {
 
 // Header =======================================
 
-.header-banner {
+.header-wrapper {
+  position: fixed;
   height: 120px;
+  width: 100%;
+  z-index: 20;
   background: #685a95;
   color: #100434;
   header {
@@ -80,6 +83,10 @@ li {
   }
 }
 
+.header-offset {
+  height: 120px;
+}
+
 // Login form ===================================
 
 #userName {
@@ -100,6 +107,7 @@ li {
 .games-wrapper {
   width: 100%;
   max-width: 500px;
+  z-index: 10;
   margin: 0 auto;
   h2 {
     text-transform: uppercase;

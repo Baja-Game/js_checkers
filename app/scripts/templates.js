@@ -30,7 +30,7 @@ templates['game_no_my_moves'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "\n<li class=\"none-waiting\">\n  <div class=\"image\"><img src=\"http://www.gravatar.com/avatar/"
     + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
-    + "?s=200&d=monsterid\"></div>\n  <div class=\"text\">\n    <div>You need some prisoners.</div>\n    <div>Join a game!</div>\n  </div>\n</li>\n\n";
+    + "?s=200&d=monsterid\"></div>\n  <div class=\"text\">\n    <div>Capture some prisoners.</div>\n    <div>Join a game!</div>\n  </div>\n</li>\n\n";
 },"useData":true});
 templates['game_no_their_moves'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
