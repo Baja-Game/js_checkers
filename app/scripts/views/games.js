@@ -39,47 +39,68 @@
             isOddTurn, isEvenTurn,
             player1IsMe, player2IsMe,
             isMyTurn,
-            hash, opponent, prisonCount, prisoner, timestamp;
+            opponentUsername, hash, opponent, prisonCount, prisoner, timestamp;
 
         filteredGamesList = self.collection.filter(function (game) {
 
           isOddTurn = game.attributes.game.turn_counter % 2 == 1;
           isEvenTurn = !isOddTurn;
 
-          // TODO: Swap out 'Test3' for app.user.username once that is exposed.
+          // TODO: Swap out app.username for ?app.user.username? once that is exposed.
 
-          player1IsMe = game.attributes.player1.username === 'Test3';
+          player1IsMe = game.attributes.player1.username === app.username;
           player2IsMe = !player1IsMe;
 
           // TODO: I may need to flip player1IsMe with player2IsMe
           // depending on how server handles the game startup.
-          isMyTurn = isOddTurn && player2IsMe || isEvenTurn && player1IsMe;
+          isMyTurn = isOddTurn && player1IsMe || isEvenTurn && player2IsMe;
 
           return (self.myGamesView) ? isMyTurn: !isMyTurn;
 
         });
 
-        filteredGamesList.forEach(function (game) {
+        if (filteredGamesList.length > 0) {
 
-          hash = CryptoJS.MD5(game.attributes.player2.username).toString();
-          game.set('hash', hash);
+          filteredGamesList.forEach(function (game) {
 
-          opponent = isMyTurn ? game.attributes.player2.username : game.attributes.player1.username;
-          game.set('opponent', opponent);
+            opponentUsername = player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
+            hash = CryptoJS.MD5(opponentUsername).toString();
+            game.set('hash', hash);
 
-          prisonCount = self.countPrisoners(game.attributes.game.board, player1IsMe);
-          game.set('prisonCount', prisonCount || 'NO');
+            opponent = player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
+            game.set('opponent', opponent);
 
-          prisoner = prisonCount === 1 ? 'prisoner' : 'prisoners';
-          game.set('prisoner', prisoner);
+            prisonCount = self.countPrisoners(game.attributes.game.board, player1IsMe);
+            game.set('prisonCount', prisonCount || 'NO');
 
-          game.set('isMyTurn', isMyTurn);
+            prisoner = prisonCount === 1 ? 'prisoner' : 'prisoners';
+            game.set('prisoner', prisoner);
 
-          timestamp = moment(game.attributes.game.updated_at).fromNow();
-          game.set('timestamp', timestamp);
+            game.set('isMyTurn', isMyTurn);
 
-          self.$el.append(self.template(game.attributes));
-        });
+            timestamp = moment(game.attributes.game.updated_at).fromNow();
+            game.set('timestamp', timestamp);
+
+            self.$el.append(self.template(game.attributes));
+          });
+
+        } else {
+
+          if (self.myGamesView) {
+            self.$el.append('' +
+              '<li class="none-waiting-on-me">' +
+                '<div class="image"><img src="http://www.gravatar.com/avatar/9d87de92?s=200&d=monsterid"></div>' +
+                '<div class="text">' +
+                  '<div class="statement">You need some prisoners</div>' +
+                  '<div class="call-to-action">Start a game!</div>' +
+                '</div>' +
+              '</li>')
+          } else {
+            self.$el.append('<li>You aren\'t waiting on anyone.  Start a game?</li>').addClass('none-waiting-on-others');
+          }
+
+
+        }
 
       });
     },

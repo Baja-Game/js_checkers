@@ -36,11 +36,7 @@ li {
       width: 95px;
       height: 90px;
       border-radius: 8px;
-      // padding-top: 16px;
       text-align: center;
-      // font-size: 44px;
-      // background: #e4cd3d;
-      // color: darkblue;
       color: #dfe2fc;
     }
     .games-icon {
@@ -102,10 +98,11 @@ li {
     color: #9b91b8;
   }
 
-  li {
+  ul.games li {
     height: 100px;
     background: white;
     border-radius: 8px;
+    cursor: pointer;
     div.image {
       float: left;
       img {
@@ -144,6 +141,24 @@ li {
         i.fa-clock-o {
           font-size: 24px;
         }
+      }
+    }
+  }
+  ul.games li.none-waiting-on-me {
+    cursor: inherit;
+    div.image {
+      float: right;
+    }
+    div.text {
+      div {
+        margin: 8px 50px;
+        font-size: 20px;
+      }
+      div.statement {
+
+      }
+      div.call-to-action {
+
       }
     }
   }
