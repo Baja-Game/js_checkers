@@ -184,6 +184,8 @@ li {
 $square_size: 60px;
 $man_size: 50px;
 $man_offset: ($square_size - $man_size) / 2;
+$man_size_large: 70px;
+$man_offset_large: ($square_size - $man_size_large) / 2;
 
 .game-wrapper {
   width: 100%;
@@ -213,17 +215,40 @@ $man_offset: ($square_size - $man_size) / 2;
       top: 5 * $square_size;
       left: 4 * $square_size;
       border-radius: 8px;
+      transition: all 1s;
       &:hover {
         background: #ddd;
       }
       .image {
         margin: $man_offset;
+        transition: all 1s;
         img {
           width: $man_size;
           border-radius: 50%;
           border: 2px solid black;
+          transition: all 1s;
         }
       }
+    }
+    .man.move1 {
+      top: 4 * $square_size;
+      left: 5 * $square_size;
+      transition: all 1s;
+      .image.large {
+        margin: $man_offset_large;
+        transition: all 1s;
+        img.large {
+          width: $man_size_large;
+          border-radius: 50%;
+          border: 2px solid black;
+          transition: all 1s;
+        }
+      }
+    }
+    .man.move2 {
+      top: 3 * $square_size;
+      left: 6 * $square_size;
+      transition: all 1s;
     }
     .board-background {
       div {
