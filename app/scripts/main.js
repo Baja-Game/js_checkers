@@ -14,12 +14,4 @@
 
   app.boardView = new app.BoardView();
 
-
-  // var save = function () {
-  //   var game = new app.Game();
-  //   app.games.add(game).save();
-  // };
-
-  // save();
-
 }());

@@ -4,7 +4,7 @@ app.BoardView = Backbone.View.extend({
   className: 'board',
 
   initialize: function () {
-    $('.board-wrapper').html(this.el);
+    $('.game-wrapper').prepend(this.el);
     this.render();
   },
 
