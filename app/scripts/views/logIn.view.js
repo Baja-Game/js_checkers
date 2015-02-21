@@ -37,9 +37,9 @@
       var loginValUser = this.$el.find('input#username').val();
       var loginValPassword = this.$el.find('input#password').val();
       var loginValEmail = this.$el.find('input#email').val();
+      var user = {user:{username: loginValUser, email: loginValEmail, password: loginValPassword}};
 
-
-      var a = new app.UserLogin({ username: loginValUser, password: loginValPassword, email: loginValEmail });
+      var a = new app.UserLogin(user);
       a.save().done(function(data){
         console.log(data);
         elem.reset();
