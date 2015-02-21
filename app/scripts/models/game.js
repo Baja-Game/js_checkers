@@ -5,55 +5,81 @@
   app.Game = Backbone.Model.extend({
 
     initialize: function () {
-      console.log('\nLocal game model created: ', this);
+      var letterBoard = this.mapLetters(this.attributes.game.board);
+      this.attributes.game.board = letterBoard;
+      // console.log('\nLocal game model created: ', this);
     },
 
-    idAttribute: '_id',  // This is for MongoDB
-
     defaults: {
-      game_id: 'unique_string',
-      timestamp: '2015-02-17T18:25:43.511Z',
-      player1: 'my_id',
-      player2: null,
-      board: [
-        [' ','M',' ','M',' ','M',' ','M'],
+      game: {
+        board: [
+          [' ','1',' ','1',' ','1',' ','1'],
 
-        ['M',' ','M',' ','M',' ','M',' '],
+          ['1',' ','1',' ','1',' ','1',' '],
 
-        [' ','M',' ','M',' ','M',' ','M'],
+          [' ','1',' ','1',' ','1',' ','1'],
 
-        [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
 
-        [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
 
-        ['m',' ','m',' ','m',' ','m',' '],
+          ['2',' ','2',' ','2',' ','2',' '],
 
-        [' ','m',' ','m',' ','m',' ','m'],
+          [' ','2',' ','2',' ','2',' ','2'],
 
-        ['m',' ','m',' ','m',' ','m',' ']
-      ],
-      last_move: [],
-      turn_counter: 0,
-      dull_move_counter: 0,
-      is_timed: false,
-      finished: 0
+          ['2',' ','2',' ','2',' ','2',' ']
+        ],
+        finished: null,
+        id: 0,
+        turn_counter: 0,
+        updated_at: "2010-12-31T15:00:50.027Z",
+        game_log: [],
+        dull_move_counter: 0,
+        is_timed: false
+      },
+      temp: 'temp',
+      player1: {
+        id: 1,
+        username: "player1"
+      },
+      player2: {
+        id: 2,
+        username: "player2"
+      }
+    },
+
+    mapLetters: function (board) {
+      var letterRow,
+          letterBoard = [];
+      board.forEach(function (row) {
+        letterRow = row.map(function (cell) {
+          if (cell === 1) return 'M';
+          if (cell === 2) return 'm';
+          if (cell === 3) return 'K';
+          if (cell === 4) return 'k';
+          return ' ';
+        });
+        letterBoard.push(letterRow);
+      });
+      return letterBoard;
     }
-
-    // TODO: Map the backend board to a matrix that looks like the default above.
 
   });
 
 
+  // TODO: Swap out this token for app.user.token when it comes available.
+
+  var token = 'ursXYhG-AeFxxk8NCzvk';
 
   app.Games = Backbone.Collection.extend({
 
     initialize: function () {
-      console.log('\nLocal games collection created: ', this);
+      // console.log('\nLocal games collection created: ', this);
     },
 
     model: app.Game,
 
-    url: 'http://tiy-atl-fe-server.herokuapp.com/collections/bob_ch_games_array'
+    url: 'https://baja-checkers.herokuapp.com/games?auth_token=' + token
 
   });
 
