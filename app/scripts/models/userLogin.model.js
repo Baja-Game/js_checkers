@@ -14,11 +14,11 @@
     defaults: {
 
       user:{
-      username: '',
-      password: '',
       email: '',
-      },
-    
+      password: '',
+      username: '',
+      }
+
     },
 
 

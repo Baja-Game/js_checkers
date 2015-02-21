@@ -153,6 +153,3 @@ var returnedJoinGameTest3 = {
     username: "Test3"
   }
 }
-
-
-
