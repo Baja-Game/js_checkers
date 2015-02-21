@@ -39,7 +39,7 @@
             isOddTurn, isEvenTurn,
             player1IsMe, player2IsMe,
             isMyTurn,
-            hash, opponent, prisonCount, prisoner, timestamp, clock;
+            hash, opponent, prisonCount, prisoner, timestamp;
 
         filteredGamesList = self.collection.filter(function (game) {
 
@@ -53,7 +53,7 @@
 
           // TODO: I may need to flip player1IsMe with player2IsMe
           // depending on how server handles the game startup.
-          isMyTurn = isOddTurn && player1IsMe || isEvenTurn && player2IsMe;
+          isMyTurn = isOddTurn && player2IsMe || isEvenTurn && player1IsMe;
 
           return (self.myGamesView) ? isMyTurn: !isMyTurn;
 
@@ -70,16 +70,13 @@
           prisonCount = self.countPrisoners(game.attributes.game.board, player1IsMe);
           game.set('prisonCount', prisonCount || 'NO');
 
-          prisoner = prisonCount === 1 ? 'prisoner' : 'prisoners'
+          prisoner = prisonCount === 1 ? 'prisoner' : 'prisoners';
           game.set('prisoner', prisoner);
 
           game.set('isMyTurn', isMyTurn);
 
           timestamp = moment(game.attributes.game.updated_at).fromNow();
           game.set('timestamp', timestamp);
-
-          clock = game.attributes.game.is_timed === 'true' ? '<i class="fa fa-clock-o"></i>' : '---';
-          game.set('clock', clock);
 
           self.$el.append(self.template(game.attributes));
         });

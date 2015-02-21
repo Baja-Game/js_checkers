@@ -1,19 +1,4 @@
 
-// Login form ===================================
-
-#userName {
-  padding: 15em;
-  width: 11em;
-  input {
-    width: 17em;
-    border-color: gray;
-    border-radius: 0.3em;
-  }
-  input#subBtn {
-    width: 8em;
-  }
-}
-
 // Main setup ===================================
 
 body {
@@ -49,20 +34,24 @@ li {
     padding: 15px;
     .header-icon {
       width: 95px;
-      height: 70px;
+      height: 90px;
       border-radius: 8px;
-      padding-top: 20px;
+      // padding-top: 16px;
       text-align: center;
-      font-size: 44px;
-      background: #e4cd3d;
-      color: darkblue;
+      // font-size: 44px;
+      // background: #e4cd3d;
+      // color: darkblue;
+      color: #dfe2fc;
     }
     .games-icon {
       float: left;
-      background: #e4cd3d;
+      padding-top: 16px;
+      font-size: 44px;
     }
     .leaderboard-icon {
       float: right;
+      padding-top: 5px;
+      font-size: 60px;
     }
     .header-center {
       .title {
@@ -76,7 +65,7 @@ li {
         width: 250px;
         height: 45px;
         line-height: 45px;
-        margin: 15px auto;
+        margin: 10px auto;
         padding: 0;
         text-align: center;
         font-size: 22px;
@@ -87,13 +76,29 @@ li {
   }
 }
 
+// Login form ===================================
+
+#userName {
+  padding: 15em;
+  width: 11em;
+  input {
+    width: 17em;
+    border-color: gray;
+    border-radius: 0.3em;
+  }
+  input#subBtn {
+    width: 8em;
+  }
+}
+
+// Games list ===================================
+
 .games-wrapper {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
   h2 {
     text-transform: uppercase;
-    margin-bottom: -10px;
     color: #9b91b8;
   }
 
@@ -117,7 +122,7 @@ li {
       }
       div.captured {
         float: left;
-        margin-top: 20px;
+        margin-top: 10px;
         span.captured-value {
           font-size: 24px;
           color: #e58300;
@@ -143,6 +148,8 @@ li {
     }
   }
 }
+
+// Board ========================================
 
 .board-wrapper {
   width: 100%;
