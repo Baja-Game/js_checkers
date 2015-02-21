@@ -9,13 +9,19 @@ app.BoardView = Backbone.View.extend({
   },
 
   render: function () {
-    for (var i = 0; i < 8; i++) {
-      var row = this.el.appendChild(document.createElement('div'));
-      for (var j = 0; j < 8; j++) {
-        row.appendChild(document.createElement('span'));
+    var isOdd = utils.isOdd;
+    for (var row = 0; row < 8; row++) {
+      var rowDiv = this.el.appendChild(document.createElement('div'));
+      rowDiv.className = 'board-row';
+      for (var col = 0; col < 8; col++) {
+        var cellSpan = rowDiv.appendChild(document.createElement('span'));
+        cellSpan.className = 'board-cell';
+        if (isOdd(row) && !isOdd(col) || !isOdd(row) && isOdd(col)) {
+          cellSpan.id = String(row) + String(col);
+        }
       }
     }
-  }
+  },
 
 });
 

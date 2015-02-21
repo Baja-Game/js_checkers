@@ -75,7 +75,7 @@
             prisonCount = self.countPrisoners(game.attributes.game.board, player1IsMe);
             game.set('prisonCount', prisonCount || 'NO');
 
-            prisoner = prisonCount === 1 ? 'prisoner' : 'prisoners';
+            prisoner = utils.pluralize('prisoner', prisonCount);
             game.set('prisoner', prisoner);
 
             game.set('isMyTurn', isMyTurn);
