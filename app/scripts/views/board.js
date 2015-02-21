@@ -1,10 +1,10 @@
 
 app.BoardView = Backbone.View.extend({
 
-  className: 'board',
+  className: 'board-background',
 
   initialize: function () {
-    $('.game-wrapper').prepend(this.el);
+    $('.board').append(this.el);
     this.render();
   },
 
