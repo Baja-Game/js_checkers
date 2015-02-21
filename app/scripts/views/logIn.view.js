@@ -32,19 +32,28 @@
     createUser: function(e){
       var self = this;
       e.preventDefault();
-      console.log('i love code');
-      e.preventDefault();
 
-      var loginValUser = this.$el.find('input').val();
-      var loginValPassword = this.$el.find('input').val();
-      var loginValEmail = this.$el.find('input').val();
+
+      var loginValUser = this.$el.find('input#username').val();
+      var loginValPassword = this.$el.find('input#password').val();
+      var loginValEmail = this.$el.find('input#email').val();
 
 
       var a = new app.UserLogin({ username: loginValUser, password: loginValPassword, email: loginValEmail });
 
       a.save().done(function(data){
         console.log(data);
+        elem.reset();
       });
+
+ //      $.ajax({
+ //    type: "POST",
+ //    url: "'https://baja-checkers.herokuapp.com/users'",
+ //    data: $(this).serialize(),
+ //    success: function() {
+ //      alert('success');
+ //    }
+ // });
 
 
     },
