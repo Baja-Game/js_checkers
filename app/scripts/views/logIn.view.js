@@ -40,20 +40,11 @@
 
 
       var a = new app.UserLogin({ username: loginValUser, password: loginValPassword, email: loginValEmail });
-
       a.save().done(function(data){
         console.log(data);
         elem.reset();
       });
 
- //      $.ajax({
- //    type: "POST",
- //    url: "'https://baja-checkers.herokuapp.com/users'",
- //    data: $(this).serialize(),
- //    success: function() {
- //      alert('success');
- //    }
- // });
 
 
     },
