@@ -37,7 +37,11 @@ li {
       height: 90px;
       border-radius: 8px;
       text-align: center;
-      color: #dfe2fc;
+      color: lighten(gold, 20%);
+      &:hover {
+        color: gold;
+        cursor: pointer;
+      }
     }
     .games-icon {
       float: left;
@@ -67,6 +71,10 @@ li {
         font-size: 22px;
         background: #e58300;
         color: white;
+        &:hover {
+          background: darken(#e58300, 3%);
+          cursor: pointer;
+        }
       }
     }
   }
@@ -97,12 +105,14 @@ li {
     text-transform: uppercase;
     color: #9b91b8;
   }
-
   ul.games li {
     height: 100px;
     background: white;
     border-radius: 8px;
     cursor: pointer;
+    &:hover {
+      background: #eee;
+    }
     div.image {
       float: left;
       img {
@@ -144,8 +154,11 @@ li {
       }
     }
   }
-  ul.games li.none-waiting-on-me {
+  ul.games li.none-waiting {
     cursor: inherit;
+    &:hover {
+      background: white;
+    }
     div.image {
       float: right;
     }
@@ -153,12 +166,6 @@ li {
       div {
         margin: 8px 50px;
         font-size: 20px;
-      }
-      div.statement {
-
-      }
-      div.call-to-action {
-
       }
     }
   }

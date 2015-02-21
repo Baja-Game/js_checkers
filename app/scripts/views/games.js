@@ -8,6 +8,8 @@
     className: 'games',
 
     template: Handlebars.templates.game,
+    templateNoMyMoves: Handlebars.templates.game_no_my_moves,
+    templateNoTheirMoves: Handlebars.templates.game_no_their_moves,
 
     events: {
       'click #showGamesButton': 'render'
@@ -87,16 +89,9 @@
         } else {
 
           if (self.myGamesView) {
-            self.$el.append('' +
-              '<li class="none-waiting-on-me">' +
-                '<div class="image"><img src="http://www.gravatar.com/avatar/9d87de92?s=200&d=monsterid"></div>' +
-                '<div class="text">' +
-                  '<div class="statement">You need some prisoners</div>' +
-                  '<div class="call-to-action">Start a game!</div>' +
-                '</div>' +
-              '</li>')
+            self.$el.append(self.templateNoMyMoves(game.attributes));
           } else {
-            self.$el.append('<li>You aren\'t waiting on anyone.  Start a game?</li>').addClass('none-waiting-on-others');
+            self.$el.append(self.templateNoTheirMoves(game.attributes));
           }
 
 
