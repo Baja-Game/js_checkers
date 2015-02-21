@@ -4,14 +4,25 @@
 
    app.UserLogin = Backbone.Model.extend({
 
+    url: 'https://baja-checkers.herokuapp.com/users',
     idAttribute: '_id',
 
-    defaults: {
-      username: '',
-      password: '',
-      email: ''
+    initialize: function(){
+
     },
 
+    defaults: {
+
+      user:{
+      username: '',
+      password: '',
+      email: '',
+      },
+    
+    },
+
+
   });
+
 
 }());

@@ -8,47 +8,46 @@
 
   app.LoginView = Backbone.View.extend({
 
-    el: '.main',
+    el: '.login',
 
-    className: 'loginForm',
+    // className: 'loginForm',
 
     template: $('#loginTemp').html(),
 
     events: {
-      'submit #userName': 'createUser'
+      'click #subBtn': 'createUser'
     },
 
     initialize: function(){
-      console.log('Login Initialized');
-
-
       this.render();
+
     },
 
     render: function () {
       this.$el.html(this.template);
+      console.log('render');
     },
 
 
     createUser: function(e){
       var self = this;
       e.preventDefault();
+      console.log('i love code');
+      e.preventDefault();
 
-      var elem = e.currentTarget;
-      var loginValUser = $(elem).find('input').val();
-      var loginValPassword = $(elem).find('input').val();
-      var loginValEmail = $(elem).find('input').val();
+      var loginValUser = this.$el.find('input').val();
+      var loginValPassword = this.$el.find('input').val();
+      var loginValEmail = this.$el.find('input').val();
+
 
       var a = new app.UserLogin({ username: loginValUser, password: loginValPassword, email: loginValEmail });
-      
 
-      this.model.add(a).save().done( function ()
-      {app.router.navigate('', { trigger: true });
+      a.save().done(function(data){
+        console.log(data);
       });
 
-      elem.reset();
 
-    }
+    },
 
   });
 
