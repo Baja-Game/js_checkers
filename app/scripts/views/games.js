@@ -11,9 +11,9 @@
     templateNoMyMoves: Handlebars.templates.game_no_my_moves,
     templateNoTheirMoves: Handlebars.templates.game_no_their_moves,
 
-    events: {
-      'click #showGamesButton': 'render'
-    },
+    // events: {
+    //   'click #showGamesButton': 'render'
+    // },
 
     initialize: function (collection, who) {
       this.collection = collection;
@@ -96,6 +96,8 @@
 
 
         }
+
+        app.menView = new app.MenView(app.games.model[0]);
 
       });
     },

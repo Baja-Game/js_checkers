@@ -61,6 +61,11 @@ templates['games_table_my_moves_data'] = template({"compiler":[6,">= 2.0.0-beta.
     + "</td>\n</tr>\n\n";
 },"useData":true});
 templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "\n<div class=\"image\">\n  <img class=\"normal\" src=\"http://www.gravatar.com/avatar/123?s=80&d=monsterid\">\n</div>\n\n";
-  },"useData":true});
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "\n<div class=\"men\", style=\"top: "
+    + escapeExpression(((helper = (helper = helpers.vpix || (depth0 != null ? depth0.vpix : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"vpix","hash":{},"data":data}) : helper)))
+    + "px; left: "
+    + escapeExpression(((helper = (helper = helpers.hpix || (depth0 != null ? depth0.hpix : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hpix","hash":{},"data":data}) : helper)))
+    + "px;'\">\n  <div class=\"image\">\n    <img class=\"normal\" src=\"http://www.gravatar.com/avatar/123?s=80&d=monsterid\">\n  </div>\n</div>\n\n";
+},"useData":true});
 })();
