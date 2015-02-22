@@ -12,9 +12,10 @@
   // app.myGamesView = new app.GamesView(app.games, 'me');
   // app.theirGamesView = new app.GamesView(app.games, 'them');
 
+  app.menView = new app.MenView();
+
   app.boardView = new app.BoardView();
 
-  app.menView = new app.MenView();
 
   // Render the men on the board:
   // Loop through board

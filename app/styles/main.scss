@@ -262,10 +262,10 @@ $man_offset_large: ($square_size - $man_size_large) / 2;
   }
 }
 
-.men {
-  top: 7 * $square_size;
-  left: 2 * $square_size;
-}
+// .men {
+//   top: 7 * $square_size;
+//   left: 2 * $square_size;
+// }
 
 .man.move1 {
   top: 4 * $square_size;
