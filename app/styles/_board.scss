@@ -25,6 +25,9 @@ $squareSize: 60px;
       }
     }
   }
+  .active {
+    background: $cEmphasis !important;
+  }
 }
 
 
@@ -59,6 +62,8 @@ $manOffset: ($squareSize - $manSize) / 2;
     }
   }
 }
+
+
 
 // .men {
 //   top: 7 * $squareSize;

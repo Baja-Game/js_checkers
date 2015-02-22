@@ -87,6 +87,7 @@
   };
 
   var launchGame = function (e) {
+    console.log('Clicked to launch game.')
     var game = app.games.find(function (game) {
       return game.attributes.game.id == e.currentTarget.id;
     });

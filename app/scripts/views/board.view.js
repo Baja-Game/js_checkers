@@ -5,6 +5,10 @@
 
     className: 'board-background',
 
+    events: {
+      'click span': 'clicked'
+    },
+
     initialize: function () {
       $('.board').append(this.el);
       this.render();
@@ -23,7 +27,25 @@
           }
         }
       }
+    },
+
+    clicked: function (e) {
+      var startLoc;
+      try {
+        startLoc = $('.men').filter('.active')[0].id;
+      }
+      catch (e) {}
+
+      if (startLoc) {
+        var endLoc = $(e.target);
+        // Send start and end location to a validator and process the move.
+
+        // Adding the background color may not be needed?
+        $('span.board-cell').removeClass('active');
+        endLoc.addClass('active');
+      }
     }
+
   });
 
 }());

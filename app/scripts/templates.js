@@ -39,7 +39,9 @@ templates['game_no_their_moves'] = template({"compiler":[6,">= 2.0.0-beta.1"],"m
 },"useData":true});
 templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "\n<div class=\"men\", style=\"top: "
+  return "\n<div id=\""
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\" class=\"men\", style=\"top: "
     + escapeExpression(((helper = (helper = helpers.vpix || (depth0 != null ? depth0.vpix : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"vpix","hash":{},"data":data}) : helper)))
     + "px; left: "
     + escapeExpression(((helper = (helper = helpers.hpix || (depth0 != null ? depth0.hpix : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hpix","hash":{},"data":data}) : helper)))
