@@ -68,6 +68,8 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
     + escapeExpression(((helper = (helper = helpers.vpix || (depth0 != null ? depth0.vpix : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"vpix","hash":{},"data":data}) : helper)))
     + "px; left: "
     + escapeExpression(((helper = (helper = helpers.hpix || (depth0 != null ? depth0.hpix : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hpix","hash":{},"data":data}) : helper)))
-    + "px;'\">\n  <div class=\"image\">\n    <img class=\"normal\" src=\"http://www.gravatar.com/avatar/123?s=80&d=monsterid\">\n  </div>\n</div>\n\n";
+    + "px;'\">\n  <div class=\"image\">\n    <img class=\"normal\" src=\"http://www.gravatar.com/avatar/"
+    + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
+    + "?s=80&d=monsterid\">\n  </div>\n</div>\n\n";
 },"useData":true});
 })();
