@@ -6,15 +6,15 @@
 
     template: Handlebars.templates.men,
 
-    initialize: function (model) {
-      this.model = model;
+    initialize: function (game) {
+      this.game = game;
       this.renderMen();
       this.listen();
     },
 
     renderMen: function () {
       var self = this,
-          board = this.model.attributes.game.board;
+          board = this.game.attributes.game.board;
 
       board.forEach(function (row, r) {
         row.forEach(function (cell, c) {
@@ -34,9 +34,9 @@
       var username, hash;
 
       if (player === 1) {
-        username = this.model.attributes.player1.username;
+        username = this.game.attributes.player1.username;
       } else {
-        username = this.model.attributes.player2.username;
+        username = this.game.attributes.player2.username;
       }
       // This hash is used to generate the unique monster image.
       hash = CryptoJS.MD5(username).toString();
