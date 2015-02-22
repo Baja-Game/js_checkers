@@ -43,7 +43,8 @@
       a.save().done(function(data){
         console.log(data);
 
-        var token = a.attributes.user.auth_token;
+        var token = a.attributes.auth_token;
+        console.log(token);
         // Set the a cookie that expires in 24 hours
 				Cookies.set('userCookie', token, {expires: 86400});
 
