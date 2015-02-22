@@ -24,7 +24,7 @@
               self.renderMan(r, c, 2);
             }
           }
-        })
+        });
       });
     },
 
@@ -48,5 +48,6 @@
       $('.board').prepend(this.template(man));
     }
   });
+
 }());
 
