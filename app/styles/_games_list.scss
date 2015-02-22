@@ -1,0 +1,67 @@
+
+ul.games li {
+  height: 100px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: $cPanel;
+  &:hover {
+    background: $cPanelHoverSubtle;
+  }
+  div.image {
+    float: left;
+    img {
+      width: 80px;
+      border-radius: 5px;
+      margin: 10px;
+    }
+  }
+  div.text {
+    float: left;
+    margin: 10px;
+    div.opponent-name {
+      font-size: 30px;
+    }
+    div.captured {
+      float: left;
+      margin-top: 10px;
+      span.captured-value {
+        font-size: 24px;
+        color: $cEmphasis;
+      }
+    }
+  }
+  div.timestamps {
+    float: right;
+    margin-right: 12px;
+    div.last-move {
+      text-align: right;
+      margin-top: 15px;
+      color: $cSubtleText;
+    }
+    div.timed {
+      text-align: right;
+      margin-top: 35px;
+      color: $cAccentDarker;
+      i.fa-clock-o {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+ul.games li.none-waiting {
+  cursor: inherit;
+  &:hover {
+    background: white;
+  }
+  div.image {
+    float: right;
+  }
+  div.text {
+    div {
+      margin: 8px 50px;
+      font-size: 20px;
+    }
+  }
+}
+

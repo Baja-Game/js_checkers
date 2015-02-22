@@ -1,0 +1,47 @@
+
+.header-icon {
+  width: 95px;
+  height: 90px;
+  border-radius: 8px;
+  text-align: center;
+  color: $cAccent;
+  &:hover {
+    color: $cAccentHover;
+    cursor: pointer;
+  }
+}
+.games-icon {
+  float: left;
+  padding-top: 16px;
+  font-size: 44px;
+}
+.leaderboard-icon {
+  float: right;
+  padding-top: 5px;
+  font-size: 60px;
+}
+.header-center {
+  .title {
+    letter-spacing: 3px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 24px;
+    color: $cBrandFaded;
+  }
+  .new-game-icon {
+    width: 250px;
+    height: 45px;
+    line-height: 45px;
+    margin: 10px auto;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+    background: $cEmphasis;
+    color: $cButtonText;
+    &:hover {
+      background: $cButtonHover;
+      cursor: pointer;
+    }
+  }
+}
+

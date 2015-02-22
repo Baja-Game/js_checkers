@@ -1,4 +1,6 @@
 
+@import 'color_palette';
+
 // Main setup ===================================
 
 body {
@@ -6,8 +8,8 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Cuprum', sans-serif;
-  background: #403075;
-  color: #333;
+  background: $cBrandDark;
+  color: $cDefaultText;
 }
 
 *:before, *:after { box-sizing: inherit; }
@@ -21,71 +23,73 @@ li {
   margin: 8px 0;
 }
 
-// Header =======================================
+h1 {
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: $cBrandLight;
+}
 
-.header-wrapper {
+h2 {
+  text-transform: uppercase;
+  color: $cBrandLight;
+}
+
+h3 {
+  margin: 0 0 30px;
+  text-align: center;
+  text-transform: lowercase;
+  color: $cBrandLight;
+}
+
+// Full-width Sticky Header Bar =================
+
+$headerHeight: 120px;
+
+.header-bar {
   position: fixed;
-  height: 120px;
+  height: $headerHeight;
   width: 100%;
-  z-index: 20;
-  background: #685a95;
+  z-index: 10;
+  background: $cBrandMedium;
   color: #100434;
-  header {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 15px;
-    .header-icon {
-      width: 95px;
-      height: 90px;
-      border-radius: 8px;
-      text-align: center;
-      color: lighten(gold, 20%);
-      &:hover {
-        color: gold;
-        cursor: pointer;
-      }
-    }
-    .games-icon {
-      float: left;
-      padding-top: 16px;
-      font-size: 44px;
-    }
-    .leaderboard-icon {
-      float: right;
-      padding-top: 5px;
-      font-size: 60px;
-    }
-    .header-center {
-      .title {
-        letter-spacing: 3px;
-        text-align: center;
-        font-family: 'Lobster', cursive;
-        font-size: 24px;
-        color: #dfe2fc;
-      }
-      .new-game-icon {
-        width: 250px;
-        height: 45px;
-        line-height: 45px;
-        margin: 10px auto;
-        padding: 0;
-        text-align: center;
-        font-size: 22px;
-        background: #e58300;
-        color: white;
-        &:hover {
-          background: darken(#e58300, 3%);
-          cursor: pointer;
-        }
-      }
-    }
-  }
 }
 
 .header-offset {
-  height: 120px;
+  height: $headerHeight;
 }
+
+// Wrappers =====================================
+
+@mixin wrapper($maxW) {
+  width: 100%;
+  max-width: $maxW;
+  overflow: hidden;
+  margin: 0 auto 20px;
+}
+
+.header-wrapper {
+  @include wrapper(600px);
+  margin-bottom: 0;
+  padding: 15px;
+}
+
+.games-wrapper {
+  @include wrapper(500px);
+}
+
+.game-wrapper {
+  @include wrapper(750px);
+}
+
+// View-specific imports ========================
+
+@import 'auth';
+@import 'header';
+@import 'games_list';
+@import 'board';
+@import 'prison';
+
 
 // Login form ===================================
 
@@ -101,248 +105,4 @@ li {
     width: 8em;
   }
 }
-
-// Games list ===================================
-
-.games-wrapper {
-  width: 100%;
-  max-width: 500px;
-  z-index: 10;
-  margin: 0 auto;
-  h2 {
-    text-transform: uppercase;
-    color: #9b91b8;
-  }
-  ul.games li {
-    height: 100px;
-    background: white;
-    border-radius: 8px;
-    cursor: pointer;
-    &:hover {
-      background: #eee;
-    }
-    div.image {
-      float: left;
-      img {
-        width: 80px;
-        border-radius: 5px;
-        margin: 10px;
-      }
-    }
-    div.text {
-      float: left;
-      margin: 10px;
-      div.opponent-name {
-        font-size: 30px;
-      }
-      div.captured {
-        float: left;
-        margin-top: 10px;
-        span.captured-value {
-          font-size: 24px;
-          color: #e58300;
-        }
-      }
-    }
-    div.timestamps {
-      float: right;
-      margin-right: 12px;
-      div.last-move {
-        text-align: right;
-        margin-top: 15px;
-        color: #bbb;
-      }
-      div.timed {
-        text-align: right;
-        margin-top: 35px;
-        color: rgb(224, 192, 19);
-        i.fa-clock-o {
-          font-size: 24px;
-        }
-      }
-    }
-  }
-  ul.games li.none-waiting {
-    cursor: inherit;
-    &:hover {
-      background: white;
-    }
-    div.image {
-      float: right;
-    }
-    div.text {
-      div {
-        margin: 8px 50px;
-        font-size: 20px;
-      }
-    }
-  }
-}
-
-// Board & Prison Wrapper =======================
-
-.game-wrapper {
-  width: 100%;
-  max-width: 750px;
-  overflow: hidden;
-  margin: 0 auto 20px;
-  h1 {
-    margin-bottom: 0;
-    text-align: center;
-    text-transform: uppercase;
-    color: #9b91b8;
-  }
-  h3 {
-    margin: 0 0 30px;
-    text-align: center;
-    text-transform: lowercase;
-    color: #9b91b8;
-  }
-}
-
-// Board ========================================
-
-$square_size: 60px;
-
-.board {
-  position: relative;
-  float: left;
-  width: 480px;
-  overflow: hidden;
-  margin-left: 40px;
-  .board-background {
-    div.board-row {
-      margin-bottom: -6px;
-    }
-    span.board-cell {
-      display: inline-block;
-      width: $square_size;
-      height: $square_size;
-      border-radius: 8px;
-    }
-    div.board-row:nth-child(odd) span.board-cell:nth-child(even),
-    div.board-row:nth-child(even) span.board-cell:nth-child(odd){
-      background: white;
-      &:hover {
-        background: #ddd;
-      }
-    }
-  }
-}
-
-// Men & animating movement =====================
-
-$man_size: 50px;
-$man_offset: ($square_size - $man_size) / 2;
-$man_size_large: 70px;
-$man_offset_large: ($square_size - $man_size_large) / 2;
-
-@mixin move_animation() {
-  transition: top 1s, left 1s, border 1s;
-}
-
-.man, .men {
-  position: absolute;
-  top: 5 * $square_size;
-  left: 4 * $square_size;
-  border-radius: 8px;
-  @include move_animation();
-  &:hover {
-    background: #ddd;
-  }
-  .image {
-    margin: $man_offset;
-    @include move_animation();
-    img {
-      width: $man_size;
-      border-radius: 50%;
-      border: 2px solid black;
-      @include move_animation();
-    }
-  }
-}
-
-// .men {
-//   top: 7 * $square_size;
-//   left: 2 * $square_size;
-// }
-
-.man.move1 {
-  top: 4 * $square_size;
-  left: 5 * $square_size;
-  @include move_animation();
-  .image.large {
-    margin: $man_offset_large;
-    @include move_animation();
-    img.large {
-      width: $man_size_large;
-      border-radius: 50%;
-      border: 2px solid black;
-      @include move_animation();
-    }
-  }
-}
-
-.man.move2 {
-  top: 3 * $square_size;
-  left: 6 * $square_size;
-  @include move_animation();
-}
-
-// Prison =======================================
-
-.prison {
-  position: relative;
-  float: left;
-  width: 190px;
-  height: 240px;
-  margin: 240px 0 0 20px;
-  padding: 10px;
-  border-radius: 8px;
-  background: #BFCAF0;
-  .avatar {
-    position: absolute;
-    top: -25px;
-    right: -20px;
-    border-radius: 8px;
-    border: 2px solid #E58300;
-    img {
-      width: 65px;
-      border-radius: 5px;
-    }
-  }
-  h4 span.count {
-    font-size: 26px;
-    color: #E58300;
-  }
-  .prisoners {
-    margin-top: 20px;
-    .prisoner {
-      float: left;
-      width: 32px;
-      height: 32px;
-      margin: 20px 5px 0;
-      img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 1px solid black;
-      }
-    }
-  }
-}
-
-
-
-
-
-// .temp {
-//   position: fixed;
-//   top: 200px;
-//   left: 300px;
-//   width: 250px;
-//   height: 250px;
-//   border: 5px solid black;
-// }
-
 

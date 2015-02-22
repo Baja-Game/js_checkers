@@ -1,0 +1,89 @@
+
+$square_size: 60px;
+
+.board {
+  position: relative;
+  float: left;
+  width: 480px;
+  overflow: hidden;
+  margin-left: 40px;
+  .board-background {
+    div.board-row {
+      margin-bottom: -6px;
+    }
+    span.board-cell {
+      display: inline-block;
+      width: $square_size;
+      height: $square_size;
+      border-radius: 8px;
+    }
+    div.board-row:nth-child(odd) span.board-cell:nth-child(even),
+    div.board-row:nth-child(even) span.board-cell:nth-child(odd){
+      background: $cPanel;
+      &:hover {
+        background: $cPanelHover;
+      }
+    }
+  }
+}
+
+// Men & animating movement =====================
+
+$man_size: 50px;
+$man_offset: ($square_size - $man_size) / 2;
+// $man_size_large: 70px;
+// $man_offset_large: ($square_size - $man_size_large) / 2;
+
+@mixin move_animation() {
+  transition: top 1s, left 1s, border 1s;
+}
+
+// .man, .men {
+.men {
+  position: absolute;
+  // top: 5 * $square_size;
+  // left: 4 * $square_size;
+  border-radius: 8px;
+  @include move_animation();
+  &:hover {
+    background: $cPanelHover;
+  }
+  .image {
+    margin: $man_offset;
+    @include move_animation();
+    img {
+      width: $man_size;
+      border-radius: 50%;
+      border: 2px solid $cBorderMan;
+      @include move_animation();
+    }
+  }
+}
+
+// .men {
+//   top: 7 * $square_size;
+//   left: 2 * $square_size;
+// }
+
+// .man.move1 {
+//   top: 4 * $square_size;
+//   left: 5 * $square_size;
+//   @include move_animation();
+//   .image.large {
+//     margin: $man_offset_large;
+//     @include move_animation();
+//     img.large {
+//       width: $man_size_large;
+//       border-radius: 50%;
+//       border: 2px solid black;
+//       @include move_animation();
+//     }
+//   }
+// }
+
+// .man.move2 {
+//   top: 3 * $square_size;
+//   left: 6 * $square_size;
+//   @include move_animation();
+// }
+
