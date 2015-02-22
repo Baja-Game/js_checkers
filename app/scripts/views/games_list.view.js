@@ -32,6 +32,7 @@
 
       obj.player1IsMe = game.attributes.player1.username === app.username;
       obj.player2IsMe = !obj.player1IsMe;
+      game.set('me', (obj.player1IsMe) ? 'player1' : 'player2');
 
       // TODO: I may need to flip player1IsMe with player2IsMe
       // depending on how server handles the game startup.
@@ -87,12 +88,12 @@
   };
 
   var launchGame = function (e) {
-    console.log('Clicked to launch game.')
+    console.log('Clicked to launch game');
     var game = app.games.find(function (game) {
       return game.attributes.game.id == e.currentTarget.id;
     });
     app.menView = new app.MenView(game);
-    app.boardView = new app.BoardView();
+    app.boardView = new app.BoardView(game);
   };
 
 

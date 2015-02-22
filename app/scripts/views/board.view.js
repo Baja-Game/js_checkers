@@ -9,7 +9,8 @@
       'click span': 'clicked'  // Listen for clicks on open board squares.
     },
 
-    initialize: function () {
+    initialize: function (game) {
+      this.game = game;
       $('.board').append(this.el);
       this.render();
     },
@@ -33,48 +34,73 @@
       // Step 1 of move is to select the man to move.  The men.view listen
       // function listens for this initial selection.
       try {
-        this.startLoc = $('.men').filter('.active')[0].id;
+        this.startID = $('.men').filter('.active')[0].id;
       }
       catch (event) {}
 
       // Step 2 is to select the open board square to move to.
-      // This is only allowed if Step 1 is complete.
-      if (this.startLoc) {
+      // This is only allowed if Step 1 is complete and the move is valid.
+      if (this.startID) {
         var endEl = $(e.target);
-        this.endLoc = endEl[0].id;
+        this.endID = endEl[0].id;
         // Send start and end location to a validator and process the move.
+        var isValidSlide = this.slideValidator(1),
+            // isValidShuffle = this.slideValidator(2),
+            isValidHop = this.hopValidator(this.slideValidator(2));
 
-        console.log(this.isvalidSlide(1));
-        this.isvalidHopTwo();
+        console.log('isValidSlide: ', isValidSlide);
+        console.log('isValidHop: ', isValidHop);
 
-        console.log(this);
+        if (isValidSlide || isValidHop) {
+          // Good to go.
 
-        // Adding the background color may not be needed?
-        $('span.board-cell').removeClass('active');
-        endEl.addClass('active');
+
+          // Adding the background color may not be needed?
+          $('span.board-cell').removeClass('active');
+          endEl.addClass('active');
+
+        }
       }
     },
 
-    // Break out the x,y coordinates of the start and end locations.
+    // Return x,y coordinates of the start and end locations.
     coords: function () {
-      return {x1: Number(this.startLoc[0]), y1: Number(this.startLoc[1]),
-              x2: Number(this.endLoc[0]),   y2: Number(this.endLoc[1])};
+      return {y1: Number(this.startID[0]), y2: Number(this.endID[0]),
+              x1: Number(this.startID[1]), x2: Number(this.endID[1])};
     },
 
-    // Check for a valid one-position diagonal slide move.
-    isvalidSlide: function (n) {
+    // Return coords if valid n-step diagonal slide move.  False otherwise.
+    slideValidator: function (n) {
       var c = this.coords(),
-          isValidX = Math.abs(c.x1 - c.x2) === n,
-          isValidY = Math.abs(c.y1 - c.y2) === n;
-      return (isValidX && isValidY) ? true : false;
+          isValidY = Math.abs(c.y1 - c.y2) === n,
+          isValidX = Math.abs(c.x1 - c.x2) === n;
+      // This currently checks a move in any direction.
+      // Need to tune up to only allow forward moved for 'men'.
+      return (isValidX && isValidY) ? c : false;
     },
 
-    // Check for a valid two-position diagonal hop move.
-    isvalidHopTwo: function () {
-      // Check for valid 2 posn move.
-      if (isvalidSlide(2)) {};
-      // Check if opponent in the middle spot.
+    // Return true if valid hop over an opponent.  Falsey otherwise.
+    hopValidator: function (c) {
+      if (c) {
+        var board = this.game.attributes.game.board,
+            y = (c.y1 + c.y2) / 2,
+            x = (c.x1 + c.x2) / 2,
+            cellContents = board[y][x],
+            emptyCell = (cellContents === ' ') || (cellContents === ''),
+            player1isMe = this.attributes.me === 'player1',
+            player2isMe = this.attributes.me === 'player2',
+            jumppingPlayer1 = cellContents === cellContents.toUpperCase(),
+            jumppingPlayer2 = cellContents === cellContents.toLowerCase(),
+            validPlayer1Jump = !emptyCell && player1isMe && jumppingPlayer2,
+            validPlayer2Jump = !emptyCell && player2isMe && jumppingPlayer1;
 
+        // console.log('Cell hopped: ', y, x);
+        // console.log('Cell contents: ', cellContents);
+        // console.log('me: ', this.attributes.me);
+
+        return validPlayer1Jump || validPlayer2Jump;
+
+      }
     }
 
   });
