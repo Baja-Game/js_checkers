@@ -8,25 +8,25 @@
 
   app.LoginView = Backbone.View.extend({
 
-    el: '.login',
-
-    // className: 'loginForm',
-
-    template: $('#loginTemp').html(),
+    className: 'loginForm',
 
     events: {
       'click #subBtn': 'createUser'
     },
+
+    template: Handlebars.templates.login,
+
 
     initialize: function(){
       this.render();
 
     },
 
-    render: function () {
+    render: function(){
+      $('.login').html(this.el);
       this.$el.html(this.template);
-      console.log('render');
     },
+
 
 
     createUser: function(e){
@@ -44,8 +44,9 @@
         console.log(data);
 
         var token = a.attributes.user.auth_token;
-				Cookies.set('playerCookie', token);
-        
+        // Set the a cookie that expires in 24 hours
+				Cookies.set('userCookie', token, {expires: 86400});
+
       });
 
 

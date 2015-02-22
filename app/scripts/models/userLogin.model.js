@@ -11,15 +11,6 @@
 
     },
 
-    defaults: {
-
-      user:{
-      email: '',
-      password: '',
-      username: '',
-      }
-
-    },
 
 
   });

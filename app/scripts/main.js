@@ -12,5 +12,10 @@
   app.myMovesView = new app.MyMovesView(app.games);
   app.theirMovesView = new app.TheirMovesView(app.games);
 
-}());
 
+  $.ajaxSetup({
+	headers: { 'auth_token': Cookies.get('userCookie')}
+
+  });
+
+}());
