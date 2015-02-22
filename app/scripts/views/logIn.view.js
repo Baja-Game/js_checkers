@@ -42,7 +42,10 @@
       var a = new app.UserLogin(user);
       a.save().done(function(data){
         console.log(data);
-        elem.reset();
+
+        var token = a.attributes.user.auth_token;
+				Cookies.set('playerCookie', token);
+        
       });
 
 
