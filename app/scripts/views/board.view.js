@@ -48,8 +48,8 @@
             // isValidShuffle = this.slideValidator(2),
             isValidHop = this.hopValidator(this.slideValidator(2));
 
-        console.log('isValidSlide: ', isValidSlide);
-        console.log('isValidHop: ', isValidHop);
+        console.log('\n isValidSlide: ', Boolean(isValidSlide));
+        console.log('isValidHop:   ', Boolean(isValidHop));
 
         if (isValidSlide || isValidHop) {
           // Good to go.
@@ -69,14 +69,30 @@
               x1: Number(this.startID[1]), x2: Number(this.endID[1])};
     },
 
-    // Return coords if valid n-step diagonal slide move.  False otherwise.
+    // Return coords if valid n-step diagonal slide move.  Falsey otherwise.
     slideValidator: function (n) {
       var c = this.coords(),
-          isValidY = Math.abs(c.y1 - c.y2) === n,
-          isValidX = Math.abs(c.x1 - c.x2) === n;
-      // This currently checks a move in any direction.
-      // Need to tune up to only allow forward moved for 'men'.
-      return (isValidX && isValidY) ? c : false;
+
+          isValidPlayer1Y = (c.y2 - c.y1) === n,
+          isValidPlayer2Y = (c.y1 - c.y2) === n,
+          isValidKingY = Math.abs(c.y1 - c.y2) === n,
+          isValidX = Math.abs(c.x1 - c.x2) === n,
+
+          board = this.game.attributes.game.board,
+          cellContents = board[c.y1][c.x1],
+
+          player1isMe = this.attributes.me === 'player1',
+          player2isMe = this.attributes.me === 'player2',
+
+          isKing = cellContents.toLowerCase() === 'k',
+
+          validPlayer1Move = player1isMe && isValidPlayer1Y && isValidX,
+          validPlayer2Move = player2isMe && isValidPlayer2Y && isValidX,
+          validKingMove = isKing && isValidKingY && isValidX;
+
+      if (validPlayer1Move || validPlayer2Move || validKingMove) {
+        return c;
+      }
     },
 
     // Return true if valid hop over an opponent.  Falsey otherwise.
