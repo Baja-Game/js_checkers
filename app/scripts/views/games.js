@@ -21,6 +21,36 @@
     return (12 - freeMenCount);
   };
 
+  var addProps = function (filteredGamesList, obj, view) {
+
+    var opponentUsername, hash, opponent, prisonCount, prisoner, timestamp;
+
+    filteredGamesList.forEach(function (game) {
+
+    opponentUsername = obj.player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
+    hash = CryptoJS.MD5(opponentUsername).toString();
+    game.set('hash', hash);
+
+    opponent = obj.player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
+    game.set('opponent', opponent);
+
+    prisonCount = countPrisoners(game.attributes.game.board, obj.player1IsMe);
+    game.set('prisonCount', prisonCount || 'NO');
+
+    prisoner = utils.pluralize('prisoner', prisonCount);
+    game.set('prisoner', prisoner);
+
+    game.set('isMyTurn', obj.isMyTurn);
+
+    timestamp = moment(game.attributes.game.updated_at).fromNow();
+    game.set('timestamp', timestamp);
+
+    view.$el.append(view.template(game.attributes));
+  });
+
+  };
+
+
 
 
   app.GamesView = Backbone.View.extend({
@@ -56,56 +86,30 @@
 
       this.collection.fetch().done(function () {
 
-        // console.log('FETCH COMPLETE');
+        var obj = {};
 
-        var filteredGamesList,
-            isOddTurn, isEvenTurn,
-            player1IsMe, player2IsMe,
-            isMyTurn,
-            opponentUsername, hash, opponent, prisonCount, prisoner, timestamp;
+        var filteredGamesList = self.collection.filter(function (game) {
 
-        filteredGamesList = self.collection.filter(function (game) {
-
-          isOddTurn = game.attributes.game.turn_counter % 2 == 1;
-          isEvenTurn = !isOddTurn;
+          obj.isOddTurn = game.attributes.game.turn_counter % 2 == 1;
+          obj.isEvenTurn = !obj.isOddTurn;
 
           // TODO: Swap out app.username for ?app.user.username? once that is exposed.
 
-          player1IsMe = game.attributes.player1.username === app.username;
-          player2IsMe = !player1IsMe;
+          obj.player1IsMe = game.attributes.player1.username === app.username;
+          obj.player2IsMe = !obj.player1IsMe;
 
           // TODO: I may need to flip player1IsMe with player2IsMe
           // depending on how server handles the game startup.
-          isMyTurn = isOddTurn && player1IsMe || isEvenTurn && player2IsMe;
+          obj.isMyTurn = obj.isOddTurn && obj.player1IsMe ||
+                         obj.isEvenTurn && obj.player2IsMe;
 
-          return (self.myGamesView) ? isMyTurn: !isMyTurn;
+          return (self.myGamesView) ? obj.isMyTurn: !obj.isMyTurn;
 
         });
 
         if (filteredGamesList.length > 0) {
+          addProps(filteredGamesList, obj, self);
 
-          filteredGamesList.forEach(function (game) {
-
-            opponentUsername = player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
-            hash = CryptoJS.MD5(opponentUsername).toString();
-            game.set('hash', hash);
-
-            opponent = player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
-            game.set('opponent', opponent);
-
-            prisonCount = countPrisoners(game.attributes.game.board, player1IsMe);
-            game.set('prisonCount', prisonCount || 'NO');
-
-            prisoner = utils.pluralize('prisoner', prisonCount);
-            game.set('prisoner', prisoner);
-
-            game.set('isMyTurn', isMyTurn);
-
-            timestamp = moment(game.attributes.game.updated_at).fromNow();
-            game.set('timestamp', timestamp);
-
-            self.$el.append(self.template(game.attributes));
-          });
 
         } else {
 
