@@ -7,7 +7,6 @@
     initialize: function () {
       var letterBoard = this.mapLetters(this.attributes.game.board);
       this.attributes.game.board = letterBoard;
-      // console.log('\nLocal game model created: ', this);
     },
 
     defaults: {
@@ -37,17 +36,17 @@
         dull_move_counter: 0,
         is_timed: false
       },
-      temp: 'temp',
       player1: {
         id: 1,
         username: "player1"
       },
-      player2: {
-        id: 2,
-        username: "player2"
-      }
+      // player2: {
+      //   id: 2,
+      //   username: "player2"
+      // }
     },
 
+    // Make 2D board array easier to understand by using letters.
     mapLetters: function (board) {
       var letterRow,
           letterBoard = [];
@@ -66,22 +65,5 @@
 
   });
 
-
-  // TODO: Swap out this token for app.user.token when it comes available.
-
-  var token = 'ursXYhG-AeFxxk8NCzvk';
-
-  app.Games = Backbone.Collection.extend({
-
-    initialize: function () {
-      // console.log('\nLocal games collection created: ', this);
-    },
-
-    model: app.Game,
-
-    url: 'https://baja-checkers.herokuapp.com/games?auth_token=' + token
-
-  });
-
-
 }());
+
