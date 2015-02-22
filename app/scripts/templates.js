@@ -1,8 +1,5 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['board'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "\n\n";
-  },"useData":true});
 templates['game'] = template({"1":function(depth0,helpers,partials,data) {
   return "<i class=\"fa fa-spinner fa-pulse\"></i>";
   },"3":function(depth0,helpers,partials,data) {
@@ -63,4 +60,7 @@ templates['games_table_my_moves_data'] = template({"compiler":[6,">= 2.0.0-beta.
     + escapeExpression(((helper = (helper = helpers.isTimed || (depth0 != null ? depth0.isTimed : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"isTimed","hash":{},"data":data}) : helper)))
     + "</td>\n</tr>\n\n";
 },"useData":true});
+templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "\n<div class=\"image\">\n  <img class=\"normal\" src=\"http://www.gravatar.com/avatar/123?s=80&d=monsterid\">\n</div>\n\n";
+  },"useData":true});
 })();

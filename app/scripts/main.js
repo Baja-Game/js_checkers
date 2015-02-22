@@ -14,6 +14,8 @@
 
   app.boardView = new app.BoardView();
 
+  app.menView = new app.MenView();
+
   // Render the men on the board:
   // Loop through board
   // if lowercase, place player1 piece in that x,y location
