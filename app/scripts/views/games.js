@@ -2,6 +2,27 @@
 (function () {
   'use strict';
 
+  var countPrisoners = function (board, player1IsMe) {
+    var i, j,
+        freeMenCount = 0;
+    board.forEach(function (row) {
+      row.forEach(function (cell) {
+        if (player1IsMe) {
+          if (cell === 'M' || cell === 'K') {
+            freeMenCount++;
+          }
+        } else {
+          if (cell === 'm' || cell === 'k') {
+            freeMenCount++;
+          }
+        }
+      });
+    });
+    return (12 - freeMenCount);
+  };
+
+
+
   app.GamesView = Backbone.View.extend({
 
     tagName: 'ul',
@@ -72,7 +93,7 @@
             opponent = player1IsMe ? game.attributes.player2.username : game.attributes.player1.username;
             game.set('opponent', opponent);
 
-            prisonCount = self.countPrisoners(game.attributes.game.board, player1IsMe);
+            prisonCount = countPrisoners(game.attributes.game.board, player1IsMe);
             game.set('prisonCount', prisonCount || 'NO');
 
             prisoner = utils.pluralize('prisoner', prisonCount);
@@ -99,26 +120,10 @@
 
         app.menView = new app.MenView(app.games.model[0]);
 
-      });
-    },
+        app.boardView = new app.BoardView();
 
-    countPrisoners: function (board, player1IsMe) {
-      var i, j,
-          freeMenCount = 0;
-      board.forEach(function (row) {
-        row.forEach(function (cell) {
-          if (player1IsMe) {
-            if (cell === 'M' || cell === 'K') {
-              freeMenCount++;
-            }
-          } else {
-            if (cell === 'm' || cell === 'k') {
-              freeMenCount++;
-            }
-          }
-        });
+
       });
-      return (12 - freeMenCount);
     }
 
   });

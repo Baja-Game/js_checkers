@@ -14,7 +14,7 @@
 
   // app.menView = new app.MenView(app.games.model[0]);
 
-  app.boardView = new app.BoardView();
+  // app.boardView = new app.BoardView();
 
 
   // Render the men on the board:
