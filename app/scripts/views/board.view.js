@@ -33,48 +33,56 @@
       // Step 1 of move is to select the man to move.  The men.view listen
       // function listens for this initial selection.
       try {
-        this.startLoc = $('.men').filter('.active')[0].id;
+        this.startID = $('.men').filter('.active')[0].id;
       }
       catch (event) {}
 
       // Step 2 is to select the open board square to move to.
-      // This is only allowed if Step 1 is complete.
-      if (this.startLoc) {
+      // This is only allowed if Step 1 is complete and the move is valid.
+      if (this.startID) {
         var endEl = $(e.target);
-        this.endLoc = endEl[0].id;
+        this.endID = endEl[0].id;
         // Send start and end location to a validator and process the move.
+        var isValidSlide = this.slideValidator(1),
+            isValidHop = this.slideValidator(2) && this.hopValidator();
 
-        console.log(this.isvalidSlide(1));
-        this.isvalidHopTwo();
+        console.log(isValidSlide);
+        console.log(isValidHop);
+
+        if (isValidSlide || isValidHop) {
+          // Good to go.
+
+
+          // Adding the background color may not be needed?
+          $('span.board-cell').removeClass('active');
+          endEl.addClass('active');
+                  }
 
         console.log(this);
 
-        // Adding the background color may not be needed?
-        $('span.board-cell').removeClass('active');
-        endEl.addClass('active');
       }
     },
 
     // Break out the x,y coordinates of the start and end locations.
     coords: function () {
-      return {x1: Number(this.startLoc[0]), y1: Number(this.startLoc[1]),
-              x2: Number(this.endLoc[0]),   y2: Number(this.endLoc[1])};
+      return {x1: Number(this.startID[0]), y1: Number(this.startID[1]),
+              x2: Number(this.endID[0]),   y2: Number(this.endID[1])};
     },
 
     // Check for a valid one-position diagonal slide move.
-    isvalidSlide: function (n) {
+    slideValidator: function (n) {
       var c = this.coords(),
           isValidX = Math.abs(c.x1 - c.x2) === n,
           isValidY = Math.abs(c.y1 - c.y2) === n;
+      // This currently checks or move in any direction.
+      // Need to tune up to only allow forward moved for 'men'.
       return (isValidX && isValidY) ? true : false;
     },
 
-    // Check for a valid two-position diagonal hop move.
-    isvalidHopTwo: function () {
-      // Check for valid 2 posn move.
-      if (isvalidSlide(2)) {};
-      // Check if opponent in the middle spot.
-
+    hopValidator: function () {
+      // Calculate the middle posn.
+      // Check to see if opponent lives there.
+      return true;
     }
 
   });
