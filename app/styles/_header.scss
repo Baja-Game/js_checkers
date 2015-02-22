@@ -2,7 +2,6 @@
 .header-icon {
   width: 95px;
   height: 90px;
-  border-radius: 8px;
   text-align: center;
   color: $cAccent;
   &:hover {
@@ -35,6 +34,7 @@
     margin: 10px auto;
     padding: 0;
     text-align: center;
+    border-radius: 8px;
     font-size: 22px;
     background: $cEmphasis;
     color: $cButtonText;

@@ -1,5 +1,5 @@
 
-$square_size: 60px;
+$squareSize: 60px;
 
 .board {
   position: relative;
@@ -13,9 +13,9 @@ $square_size: 60px;
     }
     span.board-cell {
       display: inline-block;
-      width: $square_size;
-      height: $square_size;
-      border-radius: 8px;
+      @include panel($squareSize, $squareSize);
+      background: none;
+      cursor: initial;
     }
     div.board-row:nth-child(odd) span.board-cell:nth-child(even),
     div.board-row:nth-child(even) span.board-cell:nth-child(odd){
@@ -27,12 +27,13 @@ $square_size: 60px;
   }
 }
 
+
 // Men & animating movement =====================
 
-$man_size: 50px;
-$man_offset: ($square_size - $man_size) / 2;
-// $man_size_large: 70px;
-// $man_offset_large: ($square_size - $man_size_large) / 2;
+$manSize: 50px;
+$manOffset: ($squareSize - $manSize) / 2;
+// $manSize_large: 70px;
+// $manOffset_large: ($squareSize - $manSize_large) / 2;
 
 @mixin move_animation() {
   transition: top 1s, left 1s, border 1s;
@@ -41,39 +42,38 @@ $man_offset: ($square_size - $man_size) / 2;
 // .man, .men {
 .men {
   position: absolute;
-  // top: 5 * $square_size;
-  // left: 4 * $square_size;
-  border-radius: 8px;
+  // top: 5 * $squareSize;
+  // left: 4 * $squareSize;
+  @include panel($squareSize, $squareSize);
   @include move_animation();
   &:hover {
     background: $cPanelHover;
+    cursor: pointer;
   }
   .image {
-    margin: $man_offset;
+    margin: $manOffset;
     @include move_animation();
     img {
-      width: $man_size;
-      border-radius: 50%;
-      border: 2px solid $cBorderMan;
+      @include man($manSize);
       @include move_animation();
     }
   }
 }
 
 // .men {
-//   top: 7 * $square_size;
-//   left: 2 * $square_size;
+//   top: 7 * $squareSize;
+//   left: 2 * $squareSize;
 // }
 
 // .man.move1 {
-//   top: 4 * $square_size;
-//   left: 5 * $square_size;
+//   top: 4 * $squareSize;
+//   left: 5 * $squareSize;
 //   @include move_animation();
 //   .image.large {
-//     margin: $man_offset_large;
+//     margin: $manOffset_large;
 //     @include move_animation();
 //     img.large {
-//       width: $man_size_large;
+//       width: $manSize_large;
 //       border-radius: 50%;
 //       border: 2px solid black;
 //       @include move_animation();
@@ -82,8 +82,8 @@ $man_offset: ($square_size - $man_size) / 2;
 // }
 
 // .man.move2 {
-//   top: 3 * $square_size;
-//   left: 6 * $square_size;
+//   top: 3 * $squareSize;
+//   left: 6 * $squareSize;
 //   @include move_animation();
 // }
 

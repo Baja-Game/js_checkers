@@ -82,6 +82,22 @@ $headerHeight: 120px;
   @include wrapper(750px);
 }
 
+// General purpose mixins =======================
+
+@mixin panel($width, $height) {
+  width: $width;
+  height: $height;
+  border-radius: 8px;
+  cursor: pointer;
+  background: $cPanel;
+}
+
+@mixin man($size) {
+  width: $size;
+  border-radius: 50%;
+  border: 2px solid $cBorderMan;
+}
+
 // View-specific imports ========================
 
 @import 'auth';

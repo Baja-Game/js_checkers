@@ -1,12 +1,13 @@
 
+$prisonerSize: 32px;
+
 .prison {
   position: relative;
   float: left;
-  width: 190px;
-  height: 240px;
+  @include panel(190px, 240px);
   margin: 240px 0 0 20px;
   padding: 10px;
-  border-radius: 8px;
+  cursor: inherit;
   background: $cPanelEmphasis;
   .avatar {
     position: absolute;
@@ -27,14 +28,12 @@
     margin-top: 20px;
     .prisoner {
       float: left;
-      width: 32px;
-      height: 32px;
+      width: $prisonerSize;
+      height: $prisonerSize;
       margin: 20px 5px 0;
       img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 1px solid $cBorderMan;
+        @include man($prisonerSize);
+        border-width: 1px;
       }
     }
   }
