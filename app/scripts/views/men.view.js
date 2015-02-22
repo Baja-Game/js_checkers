@@ -54,8 +54,11 @@
     listen: function () {
       $('.game-wrapper').on('click', '.men', function (e) {
         var target = $(e.currentTarget);
+
+        // Check that this is my man?  If it is, then proceed...
+
         if (target.hasClass('active')) {
-          target.removeClass('active')
+          target.removeClass('active');
         } else {
           $('.men').removeClass('active');
           target.addClass('active');
