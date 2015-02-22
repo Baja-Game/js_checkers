@@ -86,6 +86,15 @@
     });
   };
 
+  var launchGame = function (e) {
+    var game = app.games.find(function (game) {
+      return game.attributes.game.id == e.currentTarget.id;
+    });
+    app.menView = new app.MenView(game);
+    app.boardView = new app.BoardView();
+  };
+
+
   app.MyMovesView = Backbone.View.extend({
 
     tagName: 'ul',
@@ -108,15 +117,10 @@
 
     render: render,
 
-    clicked: function (e) {
-      var gameObj = app.games.find(function (game) {
-        return game.attributes.game.id == e.currentTarget.id;
-      });
+    clicked: launchGame
 
-      app.menView = new app.MenView(gameObj);
-      app.boardView = new app.BoardView();
-    }
   });
+
 
   app.TheirMovesView = Backbone.View.extend({
 
@@ -140,14 +144,8 @@
 
     render: render,
 
-    clicked: function (e) {
-      var gameObj = app.games.find(function (game) {
-        return game.attributes.game.id == e.currentTarget.id;
-      });
+    clicked: launchGame
 
-      app.menView = new app.MenView(gameObj);
-      app.boardView = new app.BoardView();
-    }
   });
 
 }());
