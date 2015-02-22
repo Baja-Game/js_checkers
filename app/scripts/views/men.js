@@ -8,7 +8,7 @@
 
     initialize: function (model) {
       this.model = model;
-      console.dir('Passed model:', model);
+      // console.dir('Passed model:', model);
       this.render();
     },
 
@@ -18,7 +18,7 @@
           hpix = pos[1] * 60,
           loc = {vpix: vpix, hpix: hpix};
 
-      console.log(app.games);
+      // console.log(app.games);
 
       $('.board').prepend(this.template(loc));
     },
