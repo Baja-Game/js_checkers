@@ -110,18 +110,25 @@
             x = (c.x1 + c.x2) / 2,
             contents = this.cellContents(y, x),
             emptyCell = (contents === ' ') || (contents === ''),
-            jumppingPlayer1 = contents === contents.toUpperCase(),
-            jumppingPlayer2 = contents === contents.toLowerCase();
+            jumppingPlayer1 = this.isPlayer1Man(contents);
 
-        validPlayer1Jump = !emptyCell && this.player1isMe() && jumppingPlayer2;
-        validPlayer2Jump = !emptyCell && !this.player1isMe() && jumppingPlayer1;
+        validPlayer1Jump = !emptyCell &&  this.player1isMe() && !jumppingPlayer1;
+        validPlayer2Jump = !emptyCell && !this.player1isMe() &&  jumppingPlayer1;
       }
       return validPlayer1Jump || validPlayer2Jump;
     },
 
+
+    // I've added these functions to board.view and men.view.
+    // Could be refactored later.
+
     cellContents: function (y, x) {
       var board = this.game.attributes.game.board;
       return board[y][x];
+    },
+
+    isPlayer1Man: function (contents) {
+      return contents === contents.toUpperCase();
     },
 
     player1isMe: function () {

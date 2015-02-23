@@ -28,9 +28,9 @@ app.username = 'Test3';
 
 var createUserURL = 'https://baja-checkers.herokuapp.com/users',
     user = {
-      email: 'test2@test.com',
-      password: 'password1',
-      username: 'Test2'
+      email: 'test29@test.com',
+      password: 'password',
+      username: 't29'
     };
 
 // $.post(createUserURL, {user: user}, function (data) {
@@ -334,6 +334,9 @@ templates['game_no_their_moves'] = template({"compiler":[6,">= 2.0.0-beta.1"],"m
     + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
     + "?s=80&d=monsterid\"></div>\n  <div class=\"text\">\n    <div>You have no games waiting on others.</div>\n    <div>Join a game!</div>\n  </div>\n</li>\n\n";
 },"useData":true});
+templates['login'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "\n<form id=\"userForm\" action=\"/\">\n  <h1>User Login:</h1>\n  <input type=\"text\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"text\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Submit Form\" id=\"subBtn\">\n</form>\n";
+  },"useData":true});
 templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "\n<div id=\""
@@ -351,7 +354,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 
   'use strict';
 
-   app.UserLogin = Backbone.Model.extend({
+   app.CreateUserLogin = Backbone.Model.extend({
 
     url: 'https://baja-checkers.herokuapp.com/users',
     idAttribute: '_id',
@@ -360,15 +363,6 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 
     },
 
-    defaults: {
-
-      user:{
-      email: '',
-      password: '',
-      username: '',
-      }
-
-    },
 
 
   });
@@ -474,27 +468,27 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 
 
 
-  app.LoginView = Backbone.View.extend({
+  app.CreateUserView = Backbone.View.extend({
 
-    el: '.login',
-
-    // className: 'loginForm',
-
-    template: $('#loginTemp').html(),
+    className: 'loginForm',
 
     events: {
       'click #subBtn': 'createUser'
     },
+
+    template: Handlebars.templates.login,
+
 
     initialize: function(){
       this.render();
 
     },
 
-    render: function () {
+    render: function(){
+      $('.login').html(this.el);
       this.$el.html(this.template);
-      console.log('render');
     },
+
 
 
     createUser: function(e){
@@ -507,10 +501,15 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       var loginValEmail = this.$el.find('input#email').val();
       var user = {user:{username: loginValUser, email: loginValEmail, password: loginValPassword}};
 
-      var a = new app.UserLogin(user);
+      var a = new app.CreateUserLogin(user);
       a.save().done(function(data){
         console.log(data);
-        elem.reset();
+
+        var token = a.attributes.auth_token;
+        console.log(token);
+        // Set the a cookie that expires in 24 hours
+				Cookies.set('userCookie', token, {expires: 86400});
+
       });
 
 
@@ -555,6 +554,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 
       obj.player1IsMe = game.attributes.player1.username === app.username;
       obj.player2IsMe = !obj.player1IsMe;
+      game.set('me', (obj.player1IsMe) ? 'player1' : 'player2');
 
       // TODO: I may need to flip player1IsMe with player2IsMe
       // depending on how server handles the game startup.
@@ -610,12 +610,12 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
   };
 
   var launchGame = function (e) {
-    console.log('Clicked to launch game.')
+    console.log('Clicked to launch game');
     var game = app.games.find(function (game) {
       return game.attributes.game.id == e.currentTarget.id;
     });
     app.menView = new app.MenView(game);
-    app.boardView = new app.BoardView();
+    app.boardView = new app.BoardView(game);
   };
 
 
@@ -687,7 +687,8 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       'click span': 'clicked'  // Listen for clicks on open board squares.
     },
 
-    initialize: function () {
+    initialize: function (game) {
+      this.game = game;
       $('.board').append(this.el);
       this.render();
     },
@@ -701,7 +702,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
           var cellSpan = rowDiv.appendChild(document.createElement('span'));
           cellSpan.className = 'board-cell';
           if (isOdd(row) && !isOdd(col) || !isOdd(row) && isOdd(col)) {
-            cellSpan.id = String(row) + String(col);
+            cellSpan.id = 's' + String(row) + String(col);
           }
         }
       }
@@ -711,48 +712,105 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       // Step 1 of move is to select the man to move.  The men.view listen
       // function listens for this initial selection.
       try {
-        this.startLoc = $('.men').filter('.active')[0].id;
+        this.startID = $('.men').filter('.active')[0].id;
       }
       catch (event) {}
 
       // Step 2 is to select the open board square to move to.
-      // This is only allowed if Step 1 is complete.
-      if (this.startLoc) {
+      // This is only allowed if Step 1 is complete and the move is valid.
+      if (this.startID) {
         var endEl = $(e.target);
-        this.endLoc = endEl[0].id;
-        // Send start and end location to a validator and process the move.
+        this.endID = endEl[0].id;
 
-        console.log(this.isvalidSlide(1));
-        this.isvalidHopTwo();
+        // Send start and end location through validators.
+        var isValidSlide = this.slideValidator(1),
+            isValidShuffle = this.slideValidator(2),
+            isValidHop = this.hopValidator(this.slideValidator(2));
 
-        console.log(this);
+        // console.log('\n isValidSlide: ', Boolean(isValidSlide));
+        // console.log('isValidHop:   ', Boolean(isValidHop));
 
-        // Adding the background color may not be needed?
-        $('span.board-cell').removeClass('active');
-        endEl.addClass('active');
+        if (isValidSlide || isValidHop) {
+
+          // Highlight the destination square.
+          $('span.board-cell').removeClass('active');
+          endEl.addClass('active');
+
+          // Animate the move.
+          var squareSize = 60,
+              endY = this.endID.slice(1, 2) * squareSize + 'px',
+              endX = this.endID.slice(2, 3) * squareSize + 'px';
+
+          $('#' + this.startID)
+            .css({top: endY, left: endX, background: 'none'})
+            // Change the id of the man to reflect its new location.
+            .attr('id', this.endID.slice(1, 3));
+
+          // TODO: Eliminate the opponents man if a hop.
+
+          // TODO: Allow only one move per turn, except for subsequent hops.
+          //       Send to a new view?
+
+        }
       }
     },
 
-    // Break out the x,y coordinates of the start and end locations.
+    // Return x,y coordinates of the start and end locations.
     coords: function () {
-      return {x1: Number(this.startLoc[0]), y1: Number(this.startLoc[1]),
-              x2: Number(this.endLoc[0]),   y2: Number(this.endLoc[1])};
+      return {y1: Number(this.startID[0]), y2: Number(this.endID.slice(1, 2)),
+              x1: Number(this.startID[1]), x2: Number(this.endID.slice(2, 3))};
     },
 
-    // Check for a valid one-position diagonal slide move.
-    isvalidSlide: function (n) {
+    // Return coords if valid n-step diagonal slide move.  False otherwise.
+    slideValidator: function (n) {
       var c = this.coords(),
+          isKing = this.cellContents(c.y1, c.x1).toLowerCase() === 'k',
+
+          isValidPlayer1Y = (c.y2 - c.y1) === n,
+          isValidPlayer2Y = (c.y1 - c.y2) === n,
+          isValidKingY = Math.abs(c.y1 - c.y2) === n,
           isValidX = Math.abs(c.x1 - c.x2) === n,
-          isValidY = Math.abs(c.y1 - c.y2) === n;
-      return (isValidX && isValidY) ? true : false;
+
+          validPlayer1Move =  this.player1isMe() && isValidPlayer1Y && isValidX,
+          validPlayer2Move = !this.player1isMe() && isValidPlayer2Y && isValidX,
+          validKingMove = isKing && isValidKingY && isValidX;
+
+      return (validPlayer1Move || validPlayer2Move || validKingMove) && c;
     },
 
-    // Check for a valid two-position diagonal hop move.
-    isvalidHopTwo: function () {
-      // Check for valid 2 posn move.
-      if (isvalidSlide(2)) {};
-      // Check if opponent in the middle spot.
+    // Return true if valid hop over an opponent.  False otherwise.
+    hopValidator: function (c) {
 
+      var validPlayer1Jump, validPlayer2Jump;
+
+      if (c) {
+        var y = (c.y1 + c.y2) / 2,
+            x = (c.x1 + c.x2) / 2,
+            contents = this.cellContents(y, x),
+            emptyCell = (contents === ' ') || (contents === ''),
+            jumppingPlayer1 = this.isPlayer1Man(contents);
+
+        validPlayer1Jump = !emptyCell &&  this.player1isMe() && !jumppingPlayer1;
+        validPlayer2Jump = !emptyCell && !this.player1isMe() &&  jumppingPlayer1;
+      }
+      return validPlayer1Jump || validPlayer2Jump;
+    },
+
+
+    // I've added these functions to board.view and men.view.
+    // Could be refactored later.
+
+    cellContents: function (y, x) {
+      var board = this.game.attributes.game.board;
+      return board[y][x];
+    },
+
+    isPlayer1Man: function (contents) {
+      return contents === contents.toUpperCase();
+    },
+
+    player1isMe: function () {
+      return this.attributes.me === 'player1';
     }
 
   });
@@ -768,15 +826,16 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 
     template: Handlebars.templates.men,
 
-    initialize: function (model) {
-      this.model = model;
+    initialize: function (game) {
+      this.game = game;
       this.renderMen();
-      this.listen();
+      this.listenForManClick();
+      this.listenForClearClick();
     },
 
     renderMen: function () {
       var self = this,
-          board = this.model.attributes.game.board;
+          board = this.game.attributes.game.board;
 
       board.forEach(function (row, r) {
         row.forEach(function (cell, c) {
@@ -796,9 +855,9 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       var username, hash;
 
       if (player === 1) {
-        username = this.model.attributes.player1.username;
+        username = this.game.attributes.player1.username;
       } else {
-        username = this.model.attributes.player2.username;
+        username = this.game.attributes.player2.username;
       }
       // This hash is used to generate the unique monster image.
       hash = CryptoJS.MD5(username).toString();
@@ -813,20 +872,59 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       $('.board').prepend(this.template(man));
     },
 
-    listen: function () {
+    // Highlight the selected man if it belongs to the user.
+    // Adding the 'active' class also makes it searchable after
+    // the click listener on the board picks up something.
+    listenForManClick: function () {
+      var self = this;
       $('.game-wrapper').on('click', '.men', function (e) {
-        var target = $(e.currentTarget);
+        var target = $(e.currentTarget),
+            id = target.attr('id'),
+            contents = self.cellContents(id[0], id[1]),
+            isMyMan = ( self.player1isMe() &&  self.isPlayer1Man(contents)) ||
+                      (!self.player1isMe() && !self.isPlayer1Man(contents));
 
-        // Check that this is my man?  If it is, then proceed...
-
-        if (target.hasClass('active')) {
-          target.removeClass('active');
-        } else {
-          $('.men').removeClass('active');
-          target.addClass('active');
+        if (isMyMan) {
+          if (target.hasClass('active')) {
+            target.removeClass('active');
+          } else {
+            $('.men').removeClass('active');
+            target.addClass('active');
+          }
         }
       });
+    },
+
+    // Clear the man highlighting if user clicks somewhere else.
+    listenForClearClick: function () {
+      $('.game-wrapper').on('click', function (e) {
+        var target = $(e.target),
+            imageEl = target.hasClass('normal'),
+            menEl = target.hasClass('men');
+
+        if (!imageEl && ! menEl) {
+          $('.men').removeClass('active');
+        }
+      });
+    },
+
+
+    // I've added these functions to board.view and men.view.
+    // Could be refactored later.
+
+    cellContents: function (y, x) {
+      var board = this.game.attributes.game.board;
+      return board[y][x];
+    },
+
+    isPlayer1Man: function (contents) {
+      return contents === contents.toUpperCase();
+    },
+
+    player1isMe: function () {
+      return this.attributes.me === 'player1';
     }
+
 
   });
 
@@ -837,7 +935,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 (function () {
   'use strict';
 
-  app.login = new app.LoginView();
+  app.login = new app.CreateUserView();
 
   app.games = new app.Games();
 
@@ -847,5 +945,10 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
   app.myMovesView = new app.MyMovesView(app.games);
   app.theirMovesView = new app.TheirMovesView(app.games);
 
-}());
 
+  $.ajaxSetup({
+	headers: { 'auth_token': Cookies.get('userCookie')}
+
+  });
+
+}());
