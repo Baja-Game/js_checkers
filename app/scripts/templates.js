@@ -1,8 +1,5 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['createuser'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "\n<form id=\"userForm\" action=\"/\">\n  <h1>Create User:</h1>\n  <input type=\"text\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"text\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Submit Form\" id=\"subBtn\">\n</form>\n";
-  },"useData":true});
 templates['game'] = template({"1":function(depth0,helpers,partials,data) {
   return "<i class=\"fa fa-spinner fa-pulse\"></i>";
   },"3":function(depth0,helpers,partials,data) {
@@ -52,7 +49,10 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
     + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
     + "?s=80&d=monsterid\">\n  </div>\n</div>\n\n";
 },"useData":true});
-templates['userlogin'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "<form id=\"userLogin\">\n  <h1>User Login</h1>\n  <input type=\"text\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"text\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Submit Form\" id=\"subBtn\" />\n</form>\n";
+templates['user_signin'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "\n<form id=\"signinForm\" action=\"/\">\n  <h1>Sign In</h1>\n  <input type=\"email\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"signinButton\" />\n</form>\n\n";
+  },"useData":true});
+templates['user_signup'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "\n<form id=\"signupForm\" action=\"/\">\n  <h1>Sign Up</h1>\n  <input type=\"email\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"signupButton\">\n</form>\n\n";
   },"useData":true});
 })();
