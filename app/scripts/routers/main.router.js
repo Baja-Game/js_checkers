@@ -22,20 +22,20 @@
 
 
     createUser: function(){
-      app.createUser = new app.CreateUserView();
+      app.createUser = new app.UserSignupView();
     },
 
     loginUser: function(){
-      app.loginUser = new app.UserLoginView();
+      app.loginUser = new app.UserSigninView();
     },
 
     listGames: function(){
-      
+      app.listGames = new app.GamesListView();
     },
 
-    gameRoute: function () {
-      app.createGame = new app.BoardView();
-    },
+    // gameRoute: function () {
+    //   app.createGame = new app.BoardView();
+    // },
 
     defaultRoute: function () {
       this.navigate('', {trigger: true});
