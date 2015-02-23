@@ -10,6 +10,8 @@
       var self = this;
       this.render();
 
+      app.newUser = true;
+
       $('.auth-wrapper').on('click', '#signupButton', function () {
         self.userSignup();
       });
@@ -20,15 +22,12 @@
     },
 
     userSignup: function () {
-      console.log('Submit');
 
       var user = {
         email:    $('#signupForm').find('input#email').val(),
         password: $('#signupForm').find('input#password').val(),
         username: $('#signupForm').find('input#username').val()
       };
-
-      console.log(user);
 
       app.user = new app.User({user: user});
 

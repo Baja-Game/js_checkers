@@ -25,6 +25,7 @@ var returnedUserTest2 = {
   }
 };
 
+// cdF2kTMEkjZuHzYcJaQf is token for bholben@gmail.com / password / bholben
 
 // LOGIN USER ==================================================================
 

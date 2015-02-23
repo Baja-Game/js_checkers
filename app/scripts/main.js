@@ -2,7 +2,8 @@
 (function () {
   'use strict';
 
-  app.userSignupView = new app.UserSignupView();
+  // app.userSignupView = new app.UserSignupView();
+  app.userSigninView = new app.UserSigninView();
 
   app.games = new app.Games();
 

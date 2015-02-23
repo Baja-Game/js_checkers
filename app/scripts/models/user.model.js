@@ -4,10 +4,12 @@
 
   app.User = Backbone.Model.extend({
 
-    url: 'https://baja-checkers.herokuapp.com/users',
-
     initialize: function () {
-      console.log('HIT');
+      if (app.newUser) {
+        this.url = 'https://baja-checkers.herokuapp.com/users';
+      } else {
+        this.url = 'https://baja-checkers.herokuapp.com/users/sign_in';
+      }
     }
 
   });
