@@ -9,7 +9,8 @@
     initialize: function (game) {
       this.game = game;
       this.renderMen();
-      this.listen();
+      this.listenForManClick();
+      this.listenForClearClick();
     },
 
     renderMen: function () {
@@ -51,20 +52,59 @@
       $('.board').prepend(this.template(man));
     },
 
-    listen: function () {
+    // Highlight the selected man if it belongs to the user.
+    // Adding the 'active' class also makes it searchable after
+    // the click listener on the board picks up something.
+    listenForManClick: function () {
+      var self = this;
       $('.game-wrapper').on('click', '.men', function (e) {
-        var target = $(e.currentTarget);
+        var target = $(e.currentTarget),
+            id = target.attr('id'),
+            contents = self.cellContents(id[0], id[1]),
+            isMyMan = ( self.player1isMe() &&  self.isPlayer1Man(contents)) ||
+                      (!self.player1isMe() && !self.isPlayer1Man(contents));
 
-        // Check that this is my man?  If it is, then proceed...
-
-        if (target.hasClass('active')) {
-          target.removeClass('active');
-        } else {
-          $('.men').removeClass('active');
-          target.addClass('active');
+        if (isMyMan) {
+          if (target.hasClass('active')) {
+            target.removeClass('active');
+          } else {
+            $('.men').removeClass('active');
+            target.addClass('active');
+          }
         }
       });
+    },
+
+    // Clear the man highlighting if user clicks somewhere else.
+    listenForClearClick: function () {
+      $('.game-wrapper').on('click', function (e) {
+        var target = $(e.target),
+            imageEl = target.hasClass('normal'),
+            menEl = target.hasClass('men');
+
+        if (!imageEl && ! menEl) {
+          $('.men').removeClass('active');
+        }
+      });
+    },
+
+
+    // I've added these functions to board.view and men.view.
+    // Could be refactored later.
+
+    cellContents: function (y, x) {
+      var board = this.game.attributes.game.board;
+      return board[y][x];
+    },
+
+    isPlayer1Man: function (contents) {
+      return contents === contents.toUpperCase();
+    },
+
+    player1isMe: function () {
+      return this.attributes.me === 'player1';
     }
+
 
   });
 
