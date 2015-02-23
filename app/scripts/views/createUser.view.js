@@ -8,7 +8,7 @@
 
   app.CreateUserView = Backbone.View.extend({
 
-    className: 'loginForm',
+    className: 'CreateUserForm',
 
     events: {
       'click #subBtn': 'createUser'
@@ -47,6 +47,12 @@
         console.log(token);
         // Set the a cookie that expires in 24 hours
 				Cookies.set('userCookie', token, {expires: 86400});
+        console.log(Cookies.get('userCookie'));
+
+        if(Cookies.get('userCookie') === token){
+					app.router.navigate('gamesList', {trigger: true });
+				}
+
 
       });
 
