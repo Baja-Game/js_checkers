@@ -14,7 +14,7 @@
       'click #subBtn': 'createUser'
     },
 
-    template: Handlebars.templates.login,
+    template: Handlebars.templates.createuser,
 
 
     initialize: function(){
