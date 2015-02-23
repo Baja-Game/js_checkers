@@ -100,7 +100,7 @@ var returnedListGamesTest3 = [
   {},  // same as above, except updated_at: "2015-02-20T15:01:28.025Z"
   {},  // same as above, except updated_at: "2015-02-20T15:21:14.469Z"
   {}   // same as above, except updated_at: "2015-02-20T16:04:27.431Z"
-]
+];
 
 
 // JOIN GAME ===================================================================
@@ -152,4 +152,4 @@ var returnedJoinGameTest3 = {
     id: 12,
     username: "Test3"
   }
-}
+};

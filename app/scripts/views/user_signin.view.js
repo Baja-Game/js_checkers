@@ -12,7 +12,7 @@
       'click #subBtn': 'userLogin'
     },
 
-    template: Handlebars.templates.userlogin,
+    template: Handlebars.templates.user_signin,
 
     initialize: function(){
       this.render();

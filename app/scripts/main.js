@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  app.login = new app.CreateUserView();
+  app.userSignupView = new app.UserSignupView();
 
   app.games = new app.Games();
 

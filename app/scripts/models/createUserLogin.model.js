@@ -1,19 +1,19 @@
-(function(){
+// (function(){
 
-  'use strict';
+//   'use strict';
 
-   app.CreateUserLogin = Backbone.Model.extend({
+//    app.CreateUserLogin = Backbone.Model.extend({
 
-    url: 'https://baja-checkers.herokuapp.com/users',
-    idAttribute: '_id',
+//     url: 'https://baja-checkers.herokuapp.com/users',
+//     idAttribute: '_id',
 
-    initialize: function(){
+//     initialize: function(){
 
-    },
-
-
-
-  });
+//     },
 
 
-}());
+
+//   });
+
+
+// }());
