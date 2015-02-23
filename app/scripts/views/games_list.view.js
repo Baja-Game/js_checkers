@@ -101,6 +101,8 @@
 
     initialize: function () {
       $('.games-wrapper').append('<div class="games-page"></div>');
+      app.myMovesView = new app.MyMovesView(app.games);
+      app.theirMovesView = new app.TheirMovesView(app.games);
     }
 
   });
