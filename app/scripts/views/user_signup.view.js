@@ -38,6 +38,7 @@
 
         // Set the cookie to expire in 30 days.
         Cookies.set('userCookie', token, {expires: 60 * 60 * 24 * 30 });
+        Cookies.set('bajaUsername', user.username, {expires: 60 * 60 * 24 * 30 });
 
         if (Cookies.get('userCookie') === token) {
           // app.router.navigate('gamesListView', {trigger: true });

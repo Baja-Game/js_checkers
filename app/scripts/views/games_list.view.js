@@ -28,9 +28,7 @@
       obj.isOddTurn = game.attributes.game.turn_counter % 2 == 1;
       obj.isEvenTurn = !obj.isOddTurn;
 
-      // TODO: Swap out app.username for ?app.user.username? once that is exposed.
-
-      obj.player1IsMe = game.attributes.player1.username === app.username;
+      obj.player1IsMe = game.attributes.player1.username === app.user.attributes.username;
       obj.player2IsMe = !obj.player1IsMe;
       game.set('me', (obj.player1IsMe) ? 'player1' : 'player2');
 
@@ -100,6 +98,14 @@
   app.GamesListView = Backbone.View.extend({
 
     initialize: function () {
+
+      var token = Cookies.get('userCookie');
+      var username = Cookies.get('bajaUsername');
+
+      // Get token from cookie here.
+      app.user = new app.User();
+      app.user.set('username', username);
+
       $('.games-wrapper').append('<div class="games-page"></div>');
       app.myMovesView = new app.MyMovesView(app.games);
       app.theirMovesView = new app.TheirMovesView(app.games);

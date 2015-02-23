@@ -33,10 +33,12 @@
       app.user.save().done(function (response) {
         console.log(response);
 
-        var token = app.user.attributes.auth_token;
+        var token = app.user.attributes.auth_token,
+            username = app.user.attributes.user.username;
 
         // Set the cookie to expire in 30 days.
         Cookies.set('userCookie', token, {expires: 60 * 60 * 24 * 30 });
+        Cookies.set('bajaUsername', username, {expires: 60 * 60 * 24 * 30 });
 
         if (Cookies.get('userCookie') === token) {
           // app.router.navigate('gamesListView', {trigger: true });
