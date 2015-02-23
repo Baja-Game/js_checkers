@@ -3,9 +3,9 @@
 
 var createUserURL = 'https://baja-checkers.herokuapp.com/users',
     user = {
-      email: 'test2@test.com',
-      password: 'password1',
-      username: 'Test2'
+      email: 'test29@test.com',
+      password: 'password',
+      username: 't29'
     };
 
 // $.post(createUserURL, {user: user}, function (data) {

@@ -24,7 +24,7 @@
           var cellSpan = rowDiv.appendChild(document.createElement('span'));
           cellSpan.className = 'board-cell';
           if (isOdd(row) && !isOdd(col) || !isOdd(row) && isOdd(col)) {
-            cellSpan.id = String(row) + String(col);
+            cellSpan.id = 's' + String(row) + String(col);
           }
         }
       }
@@ -43,21 +43,35 @@
       if (this.startID) {
         var endEl = $(e.target);
         this.endID = endEl[0].id;
-        // Send start and end location to a validator and process the move.
+
+        // Send start and end location through validators.
         var isValidSlide = this.slideValidator(1),
-            // isValidShuffle = this.slideValidator(2),
+            isValidShuffle = this.slideValidator(2),
             isValidHop = this.hopValidator(this.slideValidator(2));
 
-        console.log('isValidSlide: ', isValidSlide);
-        console.log('isValidHop: ', isValidHop);
+        // console.log('\n isValidSlide: ', Boolean(isValidSlide));
+        // console.log('isValidHop:   ', Boolean(isValidHop));
 
         if (isValidSlide || isValidHop) {
-          // Good to go.
 
-
-          // Adding the background color may not be needed?
+          // Highlight the destination square.
           $('span.board-cell').removeClass('active');
           endEl.addClass('active');
+
+          // Animate the move.
+          var squareSize = 60,
+              endY = this.endID.slice(1, 2) * squareSize + 'px',
+              endX = this.endID.slice(2, 3) * squareSize + 'px';
+
+          $('#' + this.startID)
+            .css({top: endY, left: endX, background: 'none'})
+            // Change the id of the man to reflect its new location.
+            .attr('id', this.endID.slice(1, 3));
+
+          // TODO: Eliminate the opponents man if a hop.
+
+          // TODO: Allow only one move per turn, except for subsequent hops.
+          //       Send to a new view?
 
         }
       }
@@ -65,42 +79,53 @@
 
     // Return x,y coordinates of the start and end locations.
     coords: function () {
-      return {y1: Number(this.startID[0]), y2: Number(this.endID[0]),
-              x1: Number(this.startID[1]), x2: Number(this.endID[1])};
+      return {y1: Number(this.startID[0]), y2: Number(this.endID.slice(1, 2)),
+              x1: Number(this.startID[1]), x2: Number(this.endID.slice(2, 3))};
     },
 
     // Return coords if valid n-step diagonal slide move.  False otherwise.
     slideValidator: function (n) {
       var c = this.coords(),
-          isValidY = Math.abs(c.y1 - c.y2) === n,
-          isValidX = Math.abs(c.x1 - c.x2) === n;
-      // This currently checks a move in any direction.
-      // Need to tune up to only allow forward moved for 'men'.
-      return (isValidX && isValidY) ? c : false;
+          isKing = this.cellContents(c.y1, c.x1).toLowerCase() === 'k',
+
+          isValidPlayer1Y = (c.y2 - c.y1) === n,
+          isValidPlayer2Y = (c.y1 - c.y2) === n,
+          isValidKingY = Math.abs(c.y1 - c.y2) === n,
+          isValidX = Math.abs(c.x1 - c.x2) === n,
+
+          validPlayer1Move =  this.player1isMe() && isValidPlayer1Y && isValidX,
+          validPlayer2Move = !this.player1isMe() && isValidPlayer2Y && isValidX,
+          validKingMove = isKing && isValidKingY && isValidX;
+
+      return (validPlayer1Move || validPlayer2Move || validKingMove) && c;
     },
 
-    // Return true if valid hop over an opponent.  Falsey otherwise.
+    // Return true if valid hop over an opponent.  False otherwise.
     hopValidator: function (c) {
+
+      var validPlayer1Jump, validPlayer2Jump;
+
       if (c) {
-        var board = this.game.attributes.game.board,
-            y = (c.y1 + c.y2) / 2,
+        var y = (c.y1 + c.y2) / 2,
             x = (c.x1 + c.x2) / 2,
-            cellContents = board[y][x],
-            emptyCell = (cellContents === ' ') || (cellContents === ''),
-            player1isMe = this.attributes.me === 'player1',
-            player2isMe = this.attributes.me === 'player2',
-            jumppingPlayer1 = cellContents === cellContents.toUpperCase(),
-            jumppingPlayer2 = cellContents === cellContents.toLowerCase(),
-            validPlayer1Jump = !emptyCell && player1isMe && jumppingPlayer2,
-            validPlayer2Jump = !emptyCell && player2isMe && jumppingPlayer1;
+            contents = this.cellContents(y, x),
+            emptyCell = (contents === ' ') || (contents === ''),
+            jumppingPlayer1 = contents === contents.toUpperCase(),
+            jumppingPlayer2 = contents === contents.toLowerCase();
 
-        // console.log('Cell hopped: ', y, x);
-        // console.log('Cell contents: ', cellContents);
-        // console.log('me: ', this.attributes.me);
-
-        return validPlayer1Jump || validPlayer2Jump;
-
+        validPlayer1Jump = !emptyCell && this.player1isMe() && jumppingPlayer2;
+        validPlayer2Jump = !emptyCell && !this.player1isMe() && jumppingPlayer1;
       }
+      return validPlayer1Jump || validPlayer2Jump;
+    },
+
+    cellContents: function (y, x) {
+      var board = this.game.attributes.game.board;
+      return board[y][x];
+    },
+
+    player1isMe: function () {
+      return this.attributes.me === 'player1';
     }
 
   });
