@@ -82,7 +82,7 @@
       if (filteredGamesList.length > 0) {
         addProps(filteredGamesList, obj, self);
       } else {
-        self.$el.append(self.templateNoMoves(game.attributes));
+        self.$el.append(self.templateNoMoves());
       }
     });
   };
