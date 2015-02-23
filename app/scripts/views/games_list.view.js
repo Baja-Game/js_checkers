@@ -97,6 +97,15 @@
   };
 
 
+  app.GamesListView = Backbone.View.extend({
+
+    initialize: function () {
+      $('.games-wrapper').append('<div class="games-page"></div>');
+    }
+
+  });
+
+
   app.MyMovesView = Backbone.View.extend({
 
     tagName: 'ul',
@@ -114,7 +123,7 @@
       this.render();
       this.myMoves = true;
 
-      $('.games-wrapper').append('<h2 id="myTurn">Your Move</h2>').append(this.el);
+      $('.games-page').append('<h2 id="myTurn">Your Move</h2>').append(this.el);
     },
 
     render: render,
@@ -141,7 +150,7 @@
       this.render();
       this.myMoves = false;
 
-      $('.games-wrapper').append('<h2 id="theirTurn">Their Move</h2>').append(this.el);
+      $('.games-page').append('<h2 id="theirTurn">Their Move</h2>').append(this.el);
     },
 
     render: render,
