@@ -50,9 +50,9 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
     + "?s=80&d=monsterid\">\n  </div>\n</div>\n\n";
 },"useData":true});
 templates['user_signin'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "\n<form>\n  <h1>Sign In</h1>\n  <input type=\"text\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"loginUser\" />\n</form>\n\n";
+  return "\n<form class=\"auth-form\" id=\"signinForm\" action=\"/\">\n  <h1>Sign In</h1>\n  <input type=\"email\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"loginUser\" />\n</form>\n\n";
   },"useData":true});
 templates['user_signup'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "\n<form id=\"signupForm\" action=\"/\">\n  <h1>Sign Up</h1>\n  <input type=\"text\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"signupButton\">\n</form>\n\n";
+  return "\n<form id=\"signupForm\" action=\"/\">\n  <h1>Sign Up</h1>\n  <input type=\"email\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"signupButton\">\n</form>\n\n";
   },"useData":true});
 })();
