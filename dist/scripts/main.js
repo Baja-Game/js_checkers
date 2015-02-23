@@ -20,7 +20,7 @@ var utils = {
 window.app = {};
 
 // Temporary - this will presumably move to app.user.username
-app.username = 'Test3';
+// app.username = 'Test3';
 
 
 
@@ -50,6 +50,7 @@ var returnedUserTest2 = {
   }
 };
 
+// cdF2kTMEkjZuHzYcJaQf is token for bholben@gmail.com / password / bholben
 
 // LOGIN USER ==================================================================
 
@@ -125,7 +126,7 @@ var returnedListGamesTest3 = [
   {},  // same as above, except updated_at: "2015-02-20T15:01:28.025Z"
   {},  // same as above, except updated_at: "2015-02-20T15:21:14.469Z"
   {}   // same as above, except updated_at: "2015-02-20T16:04:27.431Z"
-]
+];
 
 
 // JOIN GAME ===================================================================
@@ -177,123 +178,7 @@ var returnedJoinGameTest3 = {
     id: 12,
     username: "Test3"
   }
-}
-
-
-var gamesURL = 'http://tiy-atl-fe-server.herokuapp.com/collections/bob_ch_games_array',
-
-    game = {
-      game_id: 'unique_string',
-      timestamp: '2015-02-17T18:25:43.511Z',
-      player1: 'my_id',
-      player2: null,
-      board: [
-        [' ','M',' ','M',' ','M',' ','M'],
-
-        ['M',' ','M',' ','M',' ','M',' '],
-
-        [' ','M',' ','M',' ','M',' ','M'],
-
-        [' ',' ',' ',' ',' ',' ',' ',' '],
-
-        [' ',' ',' ',' ',' ',' ',' ',' '],
-
-        ['m',' ','m',' ','m',' ','m',' '],
-
-        [' ','m',' ','m',' ','m',' ','m'],
-
-        ['m',' ','m',' ','m',' ','m',' ']
-      ],
-      last_move: [],
-      turn_counter: 1,
-      dull_move_counter: 0,
-      is_timed: false,
-      finished: 0
-    };
-
-
-// $.post(gamesURL, game, function (data) {
-//   console.log(data);
-// });
-
-game.timestamp = '2015-02-17T18:35:43.511Z';
-game.board[5][4] = ' ';
-game.board[4][5] = 'm';
-game.player2 = 'Opponent1';
-game.turn_counter = 2;
-game.dull_move_counter = 1;
-
-// $.post(gamesURL, game, function (data) {
-//   console.log(data);
-// });
-
-game.timestamp = '2015-02-17T18:45:43.511Z';
-game.board[2][1] = ' ';
-game.board[3][2] = 'M';
-game.player2 = 'Opponent2';
-game.turn_counter = 3;
-game.dull_move_counter = 2;
-
-// $.post(gamesURL, game, function (data) {
-//   console.log(data);
-// });
-
-
-
-
-
-var games = [
-  {
-    isMyTurn: true,
-    lastMoveTime: '9h',
-    opponent: 'BossMan',
-    myPrisonCount: 8,
-    isTimed: true
-  },
-  {
-    isMyTurn: true,
-    lastMoveTime: '2d',
-    opponent: 'GrassZilla',
-    myPrisonCount: 2,
-    isTimed: false
-  },
-  {
-    isMyTurn: true,
-    lastMoveTime: '2d',
-    opponent: 'Amelia_Badelia',
-    myPrisonCount: 'NO',
-    isTimed: false
-  },
-  {
-    isMyTurn: true,
-    lastMoveTime: '5d',
-    opponent: 'Choe',
-    myPrisonCount: 1,
-    isTimed: true
-  },
-  {
-    isMyTurn: false,
-    lastMoveTime: '1m',
-    opponent: 'Blasphemous',
-    myPrisonCount: 3,
-    isTimed: true
-  },
-  {
-    isMyTurn: false,
-    lastMoveTime: '2d',
-    opponent: 'BurgWorm',
-    myPrisonCount: 2,
-    isTimed: true
-  },
-  {
-    isMyTurn: false,
-    lastMoveTime: '2d',
-    opponent: 'Eureka',
-    myPrisonCount: 9,
-    isTimed: false
-  },
-];
-
+};
 
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
@@ -334,9 +219,6 @@ templates['game_no_their_moves'] = template({"compiler":[6,">= 2.0.0-beta.1"],"m
     + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
     + "?s=80&d=monsterid\"></div>\n  <div class=\"text\">\n    <div>You have no games waiting on others.</div>\n    <div>Join a game!</div>\n  </div>\n</li>\n\n";
 },"useData":true});
-templates['login'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "\n<form id=\"userForm\" action=\"/\">\n  <h1>User Login:</h1>\n  <input type=\"text\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"text\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Submit Form\" id=\"subBtn\">\n</form>\n";
-  },"useData":true});
 templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "\n<div id=\""
@@ -349,26 +231,31 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
     + escapeExpression(((helper = (helper = helpers.hash || (depth0 != null ? depth0.hash : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"hash","hash":{},"data":data}) : helper)))
     + "?s=80&d=monsterid\">\n  </div>\n</div>\n\n";
 },"useData":true});
+templates['user_signin'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "\n<form id=\"signinForm\" action=\"/\">\n  <h1>Sign In</h1>\n  <input type=\"email\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"signinButton\" />\n</form>\n\n";
+  },"useData":true});
+templates['user_signup'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "\n<form id=\"signupForm\" action=\"/\">\n  <h1>Sign Up</h1>\n  <input type=\"email\" placeholder=\"Email\" id=\"email\" />\n  <input type=\"password\" placeholder=\"Password\" id=\"password\" />\n  <input type=\"text\" placeholder=\"Username\" id=\"username\" />\n  <input type=\"button\" value=\"Capture some monsters...\" id=\"signupButton\">\n</form>\n\n";
+  },"useData":true});
 })();
-(function(){
 
+(function () {
   'use strict';
 
-   app.CreateUserLogin = Backbone.Model.extend({
+  app.User = Backbone.Model.extend({
 
-    url: 'https://baja-checkers.herokuapp.com/users',
-    idAttribute: '_id',
-
-    initialize: function(){
-
-    },
-
-
+    initialize: function () {
+      if (app.newUser) {
+        this.url = 'https://baja-checkers.herokuapp.com/users';
+      } else {
+        this.url = 'https://baja-checkers.herokuapp.com/users/sign_in';
+      }
+    }
 
   });
 
-
 }());
+
 
 
 (function () {
@@ -447,6 +334,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
   // TODO: Swap out this token for app.user.token when it comes available.
 
   var token = 'ursXYhG-AeFxxk8NCzvk';
+  // var token = app.user.attributes.auth_token;
 
   app.Games = Backbone.Collection.extend({
 
@@ -464,61 +352,155 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 
   'use strict';
 
-
-
-
-
-  app.CreateUserView = Backbone.View.extend({
-
-    className: 'loginForm',
-
-    events: {
-      'click #subBtn': 'createUser'
-    },
-
-    template: Handlebars.templates.login,
+  app.MainRouter = Backbone.Router.extend({
 
 
     initialize: function(){
-      this.render();
+      Backbone.history.start();
+      this.on('route', this.checkRoute, this);
+    },
+
+    routes: {
+      'user_create': 'createUser',
+      'login': 'loginUser',
+      'list_games': 'listGames',
+      'game': 'gameRoute',
+      '*path':  'defaultRoute'
 
     },
 
-    render: function(){
-      $('.login').html(this.el);
-      this.$el.html(this.template);
+
+
+    createUser: function(){
+      app.createUser = new app.UserSignupView();
     },
 
+    loginUser: function(){
+      app.loginUser = new app.UserSigninView();
+    },
 
+    listGames: function(){
+      app.listGames = new app.GamesListView();
+    },
 
-    createUser: function(e){
-      var self = this;
-      e.preventDefault();
+    // gameRoute: function () {
+    //   app.createGame = new app.BoardView();
+    // },
 
-
-      var loginValUser = this.$el.find('input#username').val();
-      var loginValPassword = this.$el.find('input#password').val();
-      var loginValEmail = this.$el.find('input#email').val();
-      var user = {user:{username: loginValUser, email: loginValEmail, password: loginValPassword}};
-
-      var a = new app.CreateUserLogin(user);
-      a.save().done(function(data){
-        console.log(data);
-
-        var token = a.attributes.auth_token;
-        console.log(token);
-        // Set the a cookie that expires in 24 hours
-				Cookies.set('userCookie', token, {expires: 86400});
-
-      });
-
-
-
+    defaultRoute: function () {
+      this.navigate('', {trigger: true});
+      console.log('Default');
     },
 
   });
 
 }());
+
+
+(function () {
+  'use strict';
+
+  app.UserSignupView = Backbone.View.extend({
+
+    template: Handlebars.templates.user_signup,
+
+    initialize: function () {
+      var self = this;
+      this.render();
+
+      app.newUser = true;
+
+      $('.auth-wrapper').on('click', '#signupButton', function () {
+        self.userSignup();
+      });
+    },
+
+    render: function () {
+      $('.auth-wrapper').html(this.template);
+    },
+
+    userSignup: function () {
+
+      var user = {
+        email:    $('#signupForm').find('input#email').val(),
+        password: $('#signupForm').find('input#password').val(),
+        username: $('#signupForm').find('input#username').val()
+      };
+
+      app.user = new app.User({user: user});
+
+      app.user.save().done(function (response) {
+        console.log(response);
+
+        var token = app.user.attributes.auth_token;
+
+        // Set the cookie to expire in 30 days.
+        Cookies.set('userCookie', token, {expires: 60 * 60 * 24 * 30 });
+        Cookies.set('bajaUsername', user.username, {expires: 60 * 60 * 24 * 30 });
+
+        if (Cookies.get('userCookie') === token) {
+          // app.router.navigate('gamesListView', {trigger: true });
+        }
+      });
+    }
+
+  });
+
+}());
+
+
+
+(function () {
+  'use strict';
+
+  app.UserSigninView = Backbone.View.extend({
+
+    template: Handlebars.templates.user_signin,
+
+    initialize: function () {
+      var self = this;
+      this.render();
+
+      app.newUser = false;
+
+      $('.auth-wrapper').on('click', '#signinButton', function () {
+        self.userSignin();
+      });
+    },
+
+    render: function () {
+      $('.auth-wrapper').html(this.template);
+    },
+
+    userSignin: function () {
+
+      var user = {
+        email:    $('#signinForm').find('input#email').val(),
+        password: $('#signinForm').find('input#password').val(),
+      };
+
+      app.user = new app.User({user: user});
+
+      app.user.save().done(function (response) {
+        console.log(response);
+
+        var token = app.user.attributes.auth_token,
+            username = app.user.attributes.user.username;
+
+        // Set the cookie to expire in 30 days.
+        Cookies.set('userCookie', token, {expires: 60 * 60 * 24 * 30 });
+        Cookies.set('bajaUsername', username, {expires: 60 * 60 * 24 * 30 });
+
+        if (Cookies.get('userCookie') === token) {
+          // app.router.navigate('gamesListView', {trigger: true });
+        }
+      });
+    }
+
+  });
+
+}());
+
 
 
 (function () {
@@ -550,9 +532,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       obj.isOddTurn = game.attributes.game.turn_counter % 2 == 1;
       obj.isEvenTurn = !obj.isOddTurn;
 
-      // TODO: Swap out app.username for ?app.user.username? once that is exposed.
-
-      obj.player1IsMe = game.attributes.player1.username === app.username;
+      obj.player1IsMe = game.attributes.player1.username === app.user.attributes.username;
       obj.player2IsMe = !obj.player1IsMe;
       game.set('me', (obj.player1IsMe) ? 'player1' : 'player2');
 
@@ -604,7 +584,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       if (filteredGamesList.length > 0) {
         addProps(filteredGamesList, obj, self);
       } else {
-        self.$el.append(self.templateNoMoves(game.attributes));
+        self.$el.append(self.templateNoMoves());
       }
     });
   };
@@ -617,6 +597,25 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
     app.menView = new app.MenView(game);
     app.boardView = new app.BoardView(game);
   };
+
+
+  app.GamesListView = Backbone.View.extend({
+
+    initialize: function () {
+
+      var token = Cookies.get('userCookie');
+      var username = Cookies.get('bajaUsername');
+
+      // Get token from cookie here.
+      app.user = new app.User();
+      app.user.set('username', username);
+
+      $('.games-wrapper').append('<div class="games-page"></div>');
+      app.myMovesView = new app.MyMovesView(app.games);
+      app.theirMovesView = new app.TheirMovesView(app.games);
+    }
+
+  });
 
 
   app.MyMovesView = Backbone.View.extend({
@@ -636,7 +635,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       this.render();
       this.myMoves = true;
 
-      $('.games-wrapper').append('<h2 id="myTurn">Your Move</h2>').append(this.el);
+      $('.games-page').append('<h2 id="myTurn">Your Move</h2>').append(this.el);
     },
 
     render: render,
@@ -663,7 +662,7 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
       this.render();
       this.myMoves = false;
 
-      $('.games-wrapper').append('<h2 id="theirTurn">Their Move</h2>').append(this.el);
+      $('.games-page').append('<h2 id="theirTurn">Their Move</h2>').append(this.el);
     },
 
     render: render,
@@ -935,15 +934,15 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
 (function () {
   'use strict';
 
-  app.login = new app.CreateUserView();
+  // app.userSignupView = new app.UserSignupView();
+  app.userSigninView = new app.UserSigninView();
 
   app.games = new app.Games();
 
   // TODO: This is really inefficient - making 2 RPC calls for the same
   // data in order to populate the "Your Move" list and then again for
   // the "Their Move" list.  Needs to be optimized later.
-  app.myMovesView = new app.MyMovesView(app.games);
-  app.theirMovesView = new app.TheirMovesView(app.games);
+  app.gamesListView = new app.GamesListView();
 
 
   $.ajaxSetup({
@@ -952,3 +951,4 @@ templates['men'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(de
   });
 
 }());
+
