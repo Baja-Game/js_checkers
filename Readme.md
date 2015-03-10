@@ -37,10 +37,3 @@ From command line:
   * `npm install`
   * `bower install`
 
-
-
-
-## Checkers
-
-Group project
-
